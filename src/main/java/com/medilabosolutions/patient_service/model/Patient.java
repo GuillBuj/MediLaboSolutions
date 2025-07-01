@@ -24,8 +24,8 @@ public class Patient {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
-    private LocalDate birthDate;
+    @Column(nullable = false, name = "birthdate")
+    private LocalDate birthdate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -33,6 +33,6 @@ public class Patient {
 
     private String address;
 
-    private String phoneNumber;
+    private String phone;
 
 }

@@ -1,5 +1,6 @@
 package com.medilabosolutions.patient_service.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.medilabosolutions.patient_service.enums.Gender;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
@@ -10,9 +11,9 @@ import java.time.LocalDate;
 public record PatientCreateDTO(
         String firstName,
         String lastName,
-        LocalDate birthDate,
+        LocalDate birthdate,
         Gender gender,
         String address,
-        String phoneNumber
+        String phone
 ) {
 }

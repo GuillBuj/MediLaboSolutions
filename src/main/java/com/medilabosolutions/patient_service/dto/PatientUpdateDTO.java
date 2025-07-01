@@ -8,9 +8,9 @@ public record PatientUpdateDTO(
         long id,
         String firstName,
         String lastName,
-        LocalDate birthDate,
+        LocalDate birthdate,
         Gender gender,
         String address,
-        String phoneNumber
+        String phone
 ) {
 }

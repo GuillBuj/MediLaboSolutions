@@ -7,9 +7,9 @@ import java.time.LocalDate;
 public record PatientListItemDTO(
         String firstName,
         String lastName,
-        LocalDate birthDate,
+        LocalDate birthdate,
         Gender gender,
         String address,
-        String phoneNumber
+        String phone
 ) {
 }
