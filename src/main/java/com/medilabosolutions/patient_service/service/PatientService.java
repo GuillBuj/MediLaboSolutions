@@ -3,6 +3,7 @@ package com.medilabosolutions.patient_service.service;
 import com.medilabosolutions.patient_service.dto.PatientCreateDTO;
 import com.medilabosolutions.patient_service.dto.PatientListItemDTO;
 import com.medilabosolutions.patient_service.dto.PatientUpdateDTO;
+import com.medilabosolutions.patient_service.exception.PatientNotFoundException;
 import com.medilabosolutions.patient_service.mapper.PatientMapper;
 import com.medilabosolutions.patient_service.model.Patient;
 import com.medilabosolutions.patient_service.repository.PatientRepository;
@@ -35,6 +36,13 @@ public class PatientService {
     public void deletePatient(Long id) {
         log.info("--- Deleting patient {}", id);
         patientRepository.deleteById(id);
+    }
+
+    public PatientListItemDTO getPatientById(Long id) {
+        log.info("--- Getting patient {}", id);
+        return patientRepository.findById(id)
+                .map(patientMapper::toPatientListItemDTO)
+                .orElseThrow(() -> new PatientNotFoundException(id));
     }
 
     public List<PatientListItemDTO> getAllPatients() {

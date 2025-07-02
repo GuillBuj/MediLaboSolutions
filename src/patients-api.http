@@ -37,7 +37,7 @@ Accept: application/json
 ###
 
 ### 🔍 GET Patient by ID (change ID if needed)
-GET {{baseUrl}}/1
+GET {{baseUrl}}/2
 Accept: application/json
 
 ###
