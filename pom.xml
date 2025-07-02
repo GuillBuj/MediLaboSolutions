@@ -3,19 +3,52 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+<modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.medilabosolutions</groupId>
-    <artifactId>medi-labo-parent</artifactId>
-    <version>1.0.0</version>
-    <packaging>pom</packaging>
+<groupId>com.medilabosolutions</groupId>
+<artifactId>MediLaboSolutions</artifactId>
+<version>1.0.0</version>
+<packaging>pom</packaging>
 
-    <modules>
-        <module>patient-service</module>
+<modules>
+<module>patient-service</module>
+<module>note-service</module>
+</modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations-java5</artifactId>
+            <version>24.1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
-    </modules>
+    <parent>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-parent</artifactId>
+<version>3.5.3</version>
+<relativePath/>
+</parent>
 
-    <name>MediLabo Parent</name>
-    <description>Parent project for MediLabo microservices</description>
+<dependencyManagement>
+<dependencies>
+    <!-- Dépendances partagées si besoin -->
+</dependencies>
+</dependencyManagement>
+
+<build>
+<pluginManagement>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+</pluginManagement>
+</build>
 
 </project>
