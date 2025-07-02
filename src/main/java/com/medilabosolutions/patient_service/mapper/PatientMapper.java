@@ -16,5 +16,4 @@ public interface PatientMapper {
     PatientListItemDTO toPatientListItemDTO(Patient entity);
     PatientCreateDTO toPatientCreateDTO(Patient entity);
     PatientUpdateDTO toPatientUpdateDTO(Patient entity);
-
 }

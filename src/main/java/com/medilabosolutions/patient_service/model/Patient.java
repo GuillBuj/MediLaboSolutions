@@ -1,6 +1,5 @@
 package com.medilabosolutions.patient_service.model;
 
-import com.medilabosolutions.patient_service.enums.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Patient {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)
@@ -27,9 +26,8 @@ public class Patient {
     @Column(nullable = false, name = "birthdate")
     private LocalDate birthdate;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Gender gender;
+    private String gender;
 
     private String address;
 

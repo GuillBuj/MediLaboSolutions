@@ -43,7 +43,7 @@ Accept: application/json
 ###
 
 ### ✏️ UPDATE Patient with ID 1 (UpdateDTO includes ID in body)
-PUT {{baseUrl}}/1
+PUT {{baseUrl}}
 Content-Type: application/json
 
 {
@@ -63,5 +63,5 @@ DELETE {{baseUrl}}/1
 
 ###
 
-### ❌ DELETE Patient with ID 2
-DELETE {{baseUrl}}/2
+### ❌ DELETE Patient with ID 52
+DELETE {{baseUrl}}/52
