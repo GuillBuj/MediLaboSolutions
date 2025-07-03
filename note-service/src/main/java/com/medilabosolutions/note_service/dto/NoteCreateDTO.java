@@ -5,9 +5,11 @@ import jakarta.validation.constraints.NotNull;
 
 public record NoteCreateDTO(
         @NotNull
-        String patientId,
+        Long patId,
+
+        String patient,
 
         @NotBlank
-        String content
+        String note
 ) {
 }

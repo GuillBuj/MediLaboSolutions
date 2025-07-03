@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface NoteRepository extends MongoRepository<Note, String> {
 
-    List<Note> findByPatientId(String patientId);
+    List<Note> findByPatId(Long patId);
 }

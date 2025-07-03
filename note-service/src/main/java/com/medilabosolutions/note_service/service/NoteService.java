@@ -1,6 +1,7 @@
 package com.medilabosolutions.note_service.service;
 
 import com.medilabosolutions.note_service.dto.NoteCreateDTO;
+import com.medilabosolutions.note_service.dto.NoteListItemDTO;
 import com.medilabosolutions.note_service.mapper.NoteMapper;
 import com.medilabosolutions.note_service.model.Note;
 import com.medilabosolutions.note_service.repository.NoteRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -22,13 +24,16 @@ public class NoteService {
     public NoteCreateDTO createNote(NoteCreateDTO noteCreateDTO) {
         log.info("Creating new note: {}", noteCreateDTO);
         Note note = noteMapper.toEntity(noteCreateDTO);
-        note.setDate(LocalDateTime.now());
+        note.setDateCreated(LocalDateTime.now());
         Note noteCreated = noteRepository.save(note);
-        return noteMapper.toDto(noteCreated);
+        return noteMapper.toNoteCreateDTO(noteCreated);
     }
 
-    public List<Note> getAllNotesByPatientId(String patientId) {
-        return noteRepository.findByPatientId(patientId);
+    public List<NoteListItemDTO> getAllNotesByPatientId(Long patientId) {
+        return noteRepository.findByPatId(patientId)
+                .stream()
+                .map(noteMapper::toNoteListItemDTO)
+                .collect(Collectors.toList());
     }
 
 }
