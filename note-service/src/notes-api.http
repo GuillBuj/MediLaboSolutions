@@ -132,7 +132,4 @@ Accept: application/json
 
 ###
 
-### 🔍 GET Note by ID (remplacer {id})
-GET {{baseUrl}}/{id}
-Accept: application/json
 

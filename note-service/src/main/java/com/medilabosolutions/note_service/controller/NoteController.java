@@ -1,7 +1,7 @@
 package com.medilabosolutions.note_service.controller;
 
 import com.medilabosolutions.note_service.dto.NoteCreateDTO;
-import com.medilabosolutions.note_service.dto.NoteListItemDTO;
+import com.medilabosolutions.note_service.dto.NoteDTO;
 import com.medilabosolutions.note_service.service.NoteService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class NoteController {
     }
 
     @GetMapping("/patient/{id}")
-    public ResponseEntity<List<NoteListItemDTO>> getAllNotes(@PathVariable Long id) {
+    public ResponseEntity<List<NoteDTO>> getAllNotes(@PathVariable Long id) {
         log.info("Getting all notes for: {}", id);
         return ResponseEntity.ok(noteService.getAllNotesByPatientId(id));
     }

@@ -1,11 +1,9 @@
 package com.medilabosolutions.patient_service.mapper;
 
 import com.medilabosolutions.patient_service.dto.PatientCreateDTO;
-import com.medilabosolutions.patient_service.dto.PatientListItemDTO;
+import com.medilabosolutions.patient_service.dto.PatientDTO;
 import com.medilabosolutions.patient_service.dto.PatientUpdateDTO;
 import com.medilabosolutions.patient_service.model.Patient;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
 //@Mapper(componentModel = "spring")
@@ -52,10 +50,11 @@ public class PatientMapper {
         return patient;
     }
 
-    public PatientListItemDTO toPatientListItemDTO(Patient entity) {
+    public PatientDTO toPatientDTO(Patient entity) {
         if (entity == null) return null;
 
-        return new PatientListItemDTO(
+        return new PatientDTO(
+                entity.getId(),
                 entity.getFirstName(),
                 entity.getLastName(),
                 entity.getBirthdate(),

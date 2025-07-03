@@ -1,7 +1,7 @@
 package com.medilabosolutions.note_service.service;
 
 import com.medilabosolutions.note_service.dto.NoteCreateDTO;
-import com.medilabosolutions.note_service.dto.NoteListItemDTO;
+import com.medilabosolutions.note_service.dto.NoteDTO;
 import com.medilabosolutions.note_service.mapper.NoteMapper;
 import com.medilabosolutions.note_service.model.Note;
 import com.medilabosolutions.note_service.repository.NoteRepository;
@@ -29,7 +29,7 @@ public class NoteService {
         return noteMapper.toNoteCreateDTO(noteCreated);
     }
 
-    public List<NoteListItemDTO> getAllNotesByPatientId(Long patientId) {
+    public List<NoteDTO> getAllNotesByPatientId(Long patientId) {
         return noteRepository.findByPatId(patientId)
                 .stream()
                 .map(noteMapper::toNoteListItemDTO)
