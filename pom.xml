@@ -13,12 +13,23 @@
     <description>Projet parent multi-modules pour les microservices Medilabo</description>
 
     <!-- Hérite du BOM de Spring Boot (version centrale ici) -->
+<!--    <parent>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-starter-parent</artifactId>-->
+<!--        <version>3.5.3</version>-->
+<!--        <relativePath/> &lt;!&ndash; important : on ne remonte pas vers un parent Maven local &ndash;&gt;-->
+<!--    </parent>-->
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.3</version>
-        <relativePath/> <!-- important : on ne remonte pas vers un parent Maven local -->
+        <version>3.2.5</version> <!-- ✅ Compatible -->
+        <relativePath />
     </parent>
+
+    <properties>
+        <spring-cloud.version>2023.0.5</spring-cloud.version> <!-- ✅ OK -->
+    </properties>
 
     <!-- 📦 Liste des modules enfants -->
     <modules>
@@ -28,11 +39,11 @@
     </modules>
 
     <!-- 🔧 Propriétés communes à tous les modules -->
-    <properties>
-        <java.version>21</java.version>
-        <spring-cloud.version>2025.0.0</spring-cloud.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+<!--    <properties>-->
+<!--        <java.version>21</java.version>-->
+<!--        <spring-cloud.version>2025.0.0</spring-cloud.version>-->
+<!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+<!--    </properties>-->
 
     <!-- 📦 Dépendances communes -->
     <dependencyManagement>
