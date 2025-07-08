@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface PatientServiceClient {
 
     @GetMapping("/api/patients/{id}")
-    ResponseEntity<PatientDTO> getPatientById(@PathVariable long id);
+    ResponseEntity<PatientDTO> getPatientById(@PathVariable(name = "id") long id);
 }

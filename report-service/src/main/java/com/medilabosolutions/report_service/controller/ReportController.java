@@ -19,8 +19,8 @@ public class ReportController {
     public ResponseEntity<ReportDTO> getReport(@PathVariable Long patientId) {
         System.out.println("🎯 Endpoint GET /api/report/" + patientId + " appelé !");
         return ResponseEntity.ok(
-                new ReportDTO(1L,"name",30,"In Danger", "risqué")
-//                reportService.generateReport(patientId
+               // new ReportDTO(1L,"name",30,"In Danger", "risqué")
+                reportService.generateReport(patientId)
                 );
     }
 }

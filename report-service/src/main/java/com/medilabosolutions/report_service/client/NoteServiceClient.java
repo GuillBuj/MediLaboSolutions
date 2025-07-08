@@ -13,5 +13,5 @@ import java.util.List;
 public interface NoteServiceClient {
 
     @GetMapping("/api/notes/patient/{id}")
-    ResponseEntity<List<NoteDTO>> getNotesByPatientId(@PathVariable long id);
+    ResponseEntity<List<NoteDTO>> getNotesByPatientId(@PathVariable(name = "id") long id);
 }

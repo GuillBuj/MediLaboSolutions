@@ -23,21 +23,9 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ReportService {
 
-    private final NoteServiceClient noteServiceClient;
+
     private final PatientServiceClient patientServiceClient;
-
-    @PostConstruct
-    public void init() {
-        Long testPatientId = 1L;  // Assurez-vous que cet ID existe dans les services
-
-        // Test de l'appel au service Note
-        List<NoteDTO> notes = getNotesByPatientId(testPatientId);
-        log.info("Notes for patient {}: {}", testPatientId, notes);
-
-        // Test de l'appel au service Patient
-        PatientDTO patient = getPatientById(testPatientId);
-        log.info("Patient details for ID {} : {}", testPatientId, patient);
-    }
+    private final NoteServiceClient noteServiceClient;
 
     public ReportDTO generateReport(Long patientId) {
         PatientDTO patient = getPatientById(patientId);

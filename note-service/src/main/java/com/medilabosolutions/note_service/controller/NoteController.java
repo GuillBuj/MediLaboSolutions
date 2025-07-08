@@ -26,7 +26,7 @@ public class NoteController {
     }
 
     @GetMapping("/patient/{id}")
-    public ResponseEntity<List<NoteDTO>> getAllNotes(@PathVariable Long id) {
+    public ResponseEntity<List<NoteDTO>> getAllNotes(@PathVariable(name = "id") Long id) {
         log.info("Getting all notes for: {}", id);
         return ResponseEntity.ok(noteService.getAllNotesByPatientId(id));
     }

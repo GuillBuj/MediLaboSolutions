@@ -3,6 +3,7 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<groupId>com.medilabosolutions</groupId>
 	<artifactId>note-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>note-service</name>
@@ -104,6 +105,7 @@
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+					<compilerArgument>-parameters</compilerArgument>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.mapstruct</groupId>
