@@ -4,17 +4,19 @@ import java.util.Set;
 
 public class TriggerConstants {
     public static final Set<String> TRIGGERS = Set.of(
-            "Hémoglobine A1C",
-            "Microalbumine",
-            "Taille",
-            "Poids",
-            "Fumeur",
-            "Fumeuse",
-            "Anormal",
-            "Cholestérol",
-            "Vertiges",
-            "Rechute",
-            "Réaction",
-            "Anticorps"
+            "hémoglobine a1c",
+            "microalbumine",
+            "taille",
+            "poids",
+            "fumeur",
+            "fumeuse",
+            "fumer",
+            "anormal",
+            "cholestérol",
+            "vertige",
+            "vertiges",
+            "rechute",
+            "réaction",
+            "anticorps"
     );
 }

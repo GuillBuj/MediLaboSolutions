@@ -2,6 +2,18 @@
 GET http://localhost:8082/api/report/1
 Accept: application/json
 
+### Récupérer un rapport de diabète pour un patient existant
+GET http://localhost:8082/api/report/2
+Accept: application/json
+
+### Récupérer un rapport de diabète pour un patient existant
+GET http://localhost:8082/api/report/3
+Accept: application/json
+
+### Récupérer un rapport de diabète pour un patient existant
+GET http://localhost:8082/api/report/4
+Accept: application/json
+
 ### Exemple de requête au patient-service
 GET http://localhost:8080/api/patients/1
 Accept: application/json

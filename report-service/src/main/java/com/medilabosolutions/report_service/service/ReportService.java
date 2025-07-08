@@ -67,7 +67,7 @@ public class ReportService {
                 if (triggerCount >= 3) return "In Danger";
             } else {
                 if (triggerCount >= 7) return "Early onset";
-                if (triggerCount >= 4) return "In Danger";
+                else if (triggerCount >= 4) return "In Danger";
             }
         } else {
             if (triggerCount >= 8) return "Early onset";
