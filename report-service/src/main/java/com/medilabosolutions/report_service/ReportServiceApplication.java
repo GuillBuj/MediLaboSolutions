@@ -20,22 +20,22 @@ public class ReportServiceApplication {
 		SpringApplication.run(ReportServiceApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner testContext(ApplicationContext ctx) {
-		return args -> {
-			System.out.println("🎯 Listing Spring Beans...");
-			Arrays.stream(ctx.getBeanDefinitionNames())
-					.sorted()
-					.forEach(System.out::println);
-		};
-	}
+//	@Bean
+//	public CommandLineRunner testContext(ApplicationContext ctx) {
+//		return args -> {
+//			System.out.println("🎯 Listing Spring Beans...");
+//			Arrays.stream(ctx.getBeanDefinitionNames())
+//					.sorted()
+//					.forEach(System.out::println);
+//		};
+//	}
 }
 
-@RestController
-@RequestMapping("/test")
-class TestController {
-	@GetMapping
-	public String ping() {
-		return "pong";
-	}
-}
+//@RestController
+//@RequestMapping("/test")
+//class TestController {
+//	@GetMapping
+//	public String ping() {
+//		return "pong";
+//	}
+//}
