@@ -1,0 +1,59 @@
+# ========================
+# Fichiers à ignorer globalement
+# ========================
+HELP.md
+target/
+build/
+.mvn/wrapper/maven-wrapper.jar
+
+# Ne pas ignorer les builds dans les sources (rare mais parfois utilisés)
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ========================
+# Spring Tool Suite (STS)
+# ========================
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# ========================
+# IntelliJ IDEA
+# ========================
+# Ignorer fichiers spécifiques à l'utilisateur
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/dictionaries/
+*.iws
+*.iml
+*.ipr
+
+# Inclure uniquement les fichiers de configuration utiles
+!.idea/modules.xml
+!.idea/misc.xml
+
+# ========================
+# NetBeans
+# ========================
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# ========================
+# VS Code
+# ========================
+# Ignorer fichiers utilisateur
+.vscode/launch.json
+.vscode/extensions.json
+
+# Inclure le fichier de config partagé
+!.vscode/settings.json
