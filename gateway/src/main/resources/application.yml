@@ -1,0 +1,30 @@
+server:
+  port: 8083  # Port de la Gateway
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: patient-service
+          uri: http://patient-service:8080
+          predicates:
+            - Path=/patient/**
+          filters:
+            - StripPrefix=1
+
+        - id: note-service
+          uri: http://note-service:8081
+          predicates:
+            - Path=/note/**
+
+        - id: report-service
+          uri: http://report-service:8082
+          predicates:
+            - Path=/report/**
+
+  security:
+    user:
+      name: admin
+      password: admin
