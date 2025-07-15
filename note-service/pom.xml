@@ -6,6 +6,7 @@
 	<groupId>com.medilabosolutions</groupId>
 	<artifactId>note-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>note-service</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -87,6 +88,17 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring-boot.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<mainClass>com.medilabosolutions.note_service.NoteServiceApplication</mainClass>
+							<layout>JAR</layout>
+						</configuration>
+					</execution>
+				</executions>
 				<configuration>
 					<excludes>
 						<exclude>
@@ -96,6 +108,7 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
 
 			<!-- Maven Compiler Plugin -->
 			<plugin>
