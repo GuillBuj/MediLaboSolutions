@@ -1,0 +1,54 @@
+### 🧪 Get all patients
+GET http://localhost:8083/api/patients
+Authorization: Basic YWRtaW46YWRtaW4= # admin:admin encodé en Base64
+Accept: application/json
+
+### 🧪 Get patient by ID
+GET http://localhost:8083/api/patients/1
+Authorization: Basic YWRtaW46YWRtaW4=
+
+### 🧪 Create new patient
+POST http://localhost:8083/api/patients
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "firstName": "Alice",
+  "lastName": "Durand",
+  "birthDate": "1985-05-10",
+  "gender": "F",
+  "address": "45 rue des Lilas, Paris",
+  "phone": "0612345678"
+}
+
+### 🧪 Update existing patient
+PUT http://localhost:8083/api/patients/1
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "firstName": "Alice",
+  "lastName": "Durand",
+  "birthDate": "1985-05-10",
+  "gender": "F",
+  "address": "123 avenue Victor Hugo",
+  "phone": "0698765432"
+}
+
+### 🧪 Get notes for patient
+GET http://localhost:8083/api/notes/patient/1
+Authorization: Basic YWRtaW46YWRtaW4=
+
+### 🧪 Add note for patient
+POST http://localhost:8083/api/notes
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "patientId": "1",
+  "content": "Fumeur. Hémoglobine A1C anormale."
+}
+
+### 🧪 Get report for patient
+GET http://localhost:8083/api/report/2
+Authorization: Basic YWRtaW46YWRtaW4=
