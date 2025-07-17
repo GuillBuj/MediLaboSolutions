@@ -101,3 +101,16 @@ services:
       interval: 20s
       timeout: 10s
       retries: 10
+
+  frontend-service:
+    build: ./frontend-service
+    depends_on:
+      - gateway
+    ports:
+      - "8084:8084"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8084/actuator/health" ]
+      interval: 20s
+      timeout: 10s
+      retries: 10
+

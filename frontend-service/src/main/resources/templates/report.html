@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Rapport</title></head>
+<body>
+<h1>Rapport</h1>
+<p th:text="'Nom: ' + ${report.fullName()}"></p>
+<p th:text="'Âge: ' + ${report.age()}"></p>
+<p th:text="'Risque: ' + ${report.riskLevel()}"></p>
+<a href="/patients">Retour</a>
+</body>
+</html>

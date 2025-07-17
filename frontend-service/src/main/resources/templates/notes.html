@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Notes Patient</title></head>
+<body>
+<h1>Notes</h1>
+<ul>
+    <li th:each="note : ${notes}">
+        <span th:text="${note.note()}"></span>
+    </li>
+</ul>
+<a href="/patients">Retour</a>
+</body>
+</html>
