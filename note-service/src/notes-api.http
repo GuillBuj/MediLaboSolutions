@@ -109,7 +109,7 @@ Content-Type: application/json
 ###
 
 ### 📋 GET ALL Notes for Patient TestNone (patId 1)
-GET {{baseUrl}}/patient/1
+GET {{baseUrl}}/rawpatient/1
 Accept: application/json
 
 ###

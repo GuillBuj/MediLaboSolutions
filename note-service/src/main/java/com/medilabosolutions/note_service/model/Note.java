@@ -16,8 +16,8 @@ public class Note {
 
     @Id
     private String id;
-    private Long patId;
+    private int patId;
     private String patient;
     private String note;
-    private LocalDateTime dateCreated;
+    private LocalDateTime date;
 }

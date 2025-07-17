@@ -24,12 +24,12 @@ public class NoteService {
     public NoteCreateDTO createNote(NoteCreateDTO noteCreateDTO) {
         log.info("Creating new note: {}", noteCreateDTO);
         Note note = noteMapper.toEntity(noteCreateDTO);
-        note.setDateCreated(LocalDateTime.now());
+        note.setDate(LocalDateTime.now());
         Note noteCreated = noteRepository.save(note);
         return noteMapper.toNoteCreateDTO(noteCreated);
     }
 
-    public List<NoteDTO> getAllNotesByPatientId(Long patientId) {
+    public List<NoteDTO> getAllNotesByPatientId(int patientId) {
         return noteRepository.findByPatId(patientId)
                 .stream()
                 .map(noteMapper::toNoteListItemDTO)
