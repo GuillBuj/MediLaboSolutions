@@ -1,7 +1,9 @@
 package com.medilabosolutions.frontend_service.controller;
 
 import com.medilabosolutions.frontend_service.dto.NoteDTO;
+import com.medilabosolutions.frontend_service.service.NoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,14 +18,19 @@ public class NoteController {
 
     private final WebClient webClient;
 
+    @Autowired
+    private NoteService noteService;
+
     @GetMapping("/patients/{id}/notes")
-    public String getPatientNotes(@PathVariable Long id, Model model) {
-        List<NoteDTO> notes = webClient.get()
-                .uri("/api/notes/patient/{id}", id)
-                .retrieve()
-                .bodyToFlux(NoteDTO.class)
-                .collectList()
-                .block();
+    public String getPatientNotes(@PathVariable int id, Model model) {
+//        List<NoteDTO> notes = webClient.get()
+//                .uri("/api/notes/patient/{id}", id)
+//                .retrieve()
+//                .bodyToFlux(NoteDTO.class)
+//                .collectList()
+//                .block();
+
+        List<NoteDTO> notes = noteService.getNotesForPatient(id);
 
         model.addAttribute("notes", notes);
         return "notes";

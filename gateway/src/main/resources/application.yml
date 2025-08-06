@@ -6,21 +6,23 @@ spring:
     name: gateway-service
   cloud:
     gateway:
-      routes:
-        - id: patient-service
-          uri: http://patient-service:8080
-          predicates:
-            - Path=/api/patients/**
+      server:
+        webflux:
+          routes:
+            - id: patient-service
+              uri: http://patient-service:8080
+              predicates:
+                - Path=/api/patients/**
 
-        - id: note-service
-          uri: http://note-service:8081
-          predicates:
-            - Path=/api/notes/**
+            - id: note-service
+              uri: http://note-service:8081
+              predicates:
+                - Path=/api/notes/**
 
-        - id: report-service
-          uri: http://report-service:8082
-          predicates:
-            - Path=/api/report/**
+            - id: report-service
+              uri: http://report-service:8082
+              predicates:
+                - Path=/api/report/**
 
   security:
     user:
@@ -31,3 +33,10 @@ logging:
   level:
     org.springframework.cloud.gateway: TRACE
     org.springframework.web: TRACE
+    reactor.netty: DEBUG
+    root: INFO
+
+
+
+jwt:
+  secret: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NDQ2ODEzOSwiZXhwIjoxNzU0NTU0NTM5fQ.djUpPNgdeL5t6wuGW5N2hDea58NjvAXmiQxNPxnaBxFtaIAOaA1Vm6O-YT0ttxTU

@@ -52,3 +52,23 @@ Authorization: Basic YWRtaW46YWRtaW4=
 ### 🧪 Get report for patient
 GET http://localhost:8083/api/report/2
 Authorization: Basic YWRtaW46YWRtaW4=
+
+
+### Obtenir un token JWT
+POST http://localhost:8083/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+
+### Test avec Basic Auth
+GET http://localhost:8083/api/notes/patient/2
+Authorization: Basic YWRtaW46YWRtaW4=
+
+### Test direct sur le service de notes
+GET http://localhost:8081/api/notes/patient/2
+
+

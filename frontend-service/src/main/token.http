@@ -1,0 +1,88 @@
+
+### Login pour obtenir le token JWT
+POST http://localhost:8083/auth/login
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+### Variante sans content-type
+POST http://localhost:8083/auth/login
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+### Variante avec application/x-www-form-urlencoded
+POST http://localhost:8083/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=admin&password=admin
+
+### Login avec Basic Auth
+POST http://localhost:8083/auth/login
+Authorization: Basic YWRtaW46YWRtaW4=
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+### Test accès direct à l'API Patients via Gateway
+GET http://localhost:8083/api/patients
+Authorization: Bearer votre_token_jwt
+
+### Test accès direct à l'API Notes via Gateway
+GET http://localhost:8083/api/notes
+Authorization: Bearer votre_token_jwt
+
+### Obtenir un token JWT
+POST http://localhost:8083/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+### Une fois le token obtenu, utilisez-le dans vos requêtes
+# GET http://localhost:8083/api/patients
+# Authorization: Bearer le_token_reçu_de_la_requête_précédente
+
+
+### Login pour obtenir le token
+POST http://localhost:8083/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+### Test direct sur la gateway avec le token
+GET http://localhost:8083/api/notes/patient/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NDQ2ODEzOSwiZXhwIjoxNzU0NTU0NTM5fQ.djUpPNgdeL5t6wuGW5N2hDea58NjvAXmiQxNPxnaBxFtaIAOaA1Vm6O-YT0ttxTU
+
+### Test via le frontend
+GET http://localhost:8084/patients/2/notes
+
+### 1. Test avec authentification Basic
+GET http://localhost:8083/api/notes/patient/2
+Authorization: Basic admin:admin
+
+### 2. Test avec Bearer token sans guillemets
+GET http://localhost:8083/api/notes/patient/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NDQ2ODEzOSwiZXhwIjoxNzU0NTU0NTM5fQ.djUpPNgdeL5t6wuGW5N2hDea58NjvAXmiQxNPxnaBxFtaIAOaA1Vm6O-YT0ttxTU
+
+### 3. Test avec token dans le header X-Auth-Token (alternative possible)
+GET http://localhost:8083/api/notes/patient/2
+X-Auth-Token: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NDQ2ODEzOSwiZXhwIjoxNzU0NTU0NTM5fQ.djUpPNgdeL5t6wuGW5N2hDea58NjvAXmiQxNPxnaBxFtaIAOaA1Vm6O-YT0ttxTU
+
+
+
+
