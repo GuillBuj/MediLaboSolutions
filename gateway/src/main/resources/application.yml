@@ -1,5 +1,5 @@
 server:
-  port: 8083  # Port de la Gateway
+  port: ${GATEWAY_PORT}
 
 spring:
   application:
@@ -39,4 +39,4 @@ logging:
 
 
 jwt:
-  secret: eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NDQ2ODEzOSwiZXhwIjoxNzU0NTU0NTM5fQ.djUpPNgdeL5t6wuGW5N2hDea58NjvAXmiQxNPxnaBxFtaIAOaA1Vm6O-YT0ttxTU
+  secret: ${JWT_SECRET}

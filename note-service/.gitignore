@@ -50,9 +50,9 @@ logs/
 *.log
 
 ### Fichiers de configuration spécifiques ###
-application-*.properties
-!application.properties
-!application-test.properties
+#application-*.properties
+#!application.properties
+#!application-test.properties
 
 ### Fichiers de sécurité ###
 *.jks
