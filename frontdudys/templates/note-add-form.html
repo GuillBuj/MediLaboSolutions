@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nouvelle note</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="mb-4">Ajouter une note</h1>
+    <form th:action="@{/notes/add}" th:object="${note}" method="post">
+        <input type="hidden" th:field="*{patId}" />
+        <input type="hidden" th:field="*{patient}" />
+        
+        <div class="mb-3">
+            <label class="form-label">Patient</label>
+            <input type="text" th:value="*{patient}" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Note</label>
+            <textarea th:field="*{note}" required class="form-control" rows="4"></textarea>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save"></i> Enregistrer
+            </button>
+            <a th:href="@{/patients/{id}/notes(id=*{patId})}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Retour
+            </a>
+        </div>
+    </form>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
