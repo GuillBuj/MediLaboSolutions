@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/note-service/pom.xml" />
         <option value="$PROJECT_DIR$/frontend-service/pom.xml" />
         <option value="$PROJECT_DIR$/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka-server/pom.xml" />
       </list>
     </option>
   </component>

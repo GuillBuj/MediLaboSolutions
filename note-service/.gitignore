@@ -1,3 +1,5 @@
+.env
+
 ### Dossiers de build ###
 target/
 !.mvn/wrapper/maven-wrapper.jar

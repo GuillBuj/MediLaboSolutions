@@ -36,6 +36,12 @@
         <module name="note-service" />
         <module name="patient-service" />
       </profile>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="eureka-server" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="medi-labo-parent" target="1.5" />
@@ -43,6 +49,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="eureka-server" options="-parameters" />
       <module name="frontend-service" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="note-service" options="-parameters" />
