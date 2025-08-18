@@ -3,27 +3,13 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Annotation profile for report-service" enabled="true">
+      <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
-        </processorPath>
-        <module name="report-service" />
+        <module name="eureka-server" />
       </profile>
-      <profile name="Annotation profile for gateway" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
-        </processorPath>
-        <module name="frontend-service" />
-        <module name="gateway" />
-      </profile>
-      <profile name="Annotation profile for note-service" enabled="true">
+      <profile name="Annotation profile for patient-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -36,11 +22,16 @@
         <module name="note-service" />
         <module name="patient-service" />
       </profile>
-      <profile name="Maven default annotation processors profile" enabled="true">
+      <profile name="Annotation profile for gateway" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="eureka-server" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+        </processorPath>
+        <module name="frontend-service" />
+        <module name="gateway" />
+        <module name="report-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -51,7 +42,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="eureka-server" options="-parameters" />
       <module name="frontend-service" options="-parameters" />
-      <module name="gateway" options="-parameters" />
+      <module name="gateway" options="-parameters -parameters -J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED" />
       <module name="note-service" options="-parameters" />
       <module name="patient-service" options="-parameters" />
       <module name="report-service" options="-parameters" />

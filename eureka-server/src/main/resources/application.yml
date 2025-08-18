@@ -6,9 +6,16 @@ spring:
     name: eureka-server
 
 server:
-  port: ${EUREKA_SERVER_PORT}
+  port: 8761
 
 eureka:
+  instance:
+    hostname: ${EUREKA_INSTANCE_HOSTNAME:localhost}  # Flexible local/Docker
+    prefer-ip-address: false
+    health-check-url-path: /actuator/health
+
   client:
-    register-with-eureka: false   # le serveur lui-même ne s'enregistre pas
-    fetch-registry: false         # pas besoin de récupérer les autres services
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/

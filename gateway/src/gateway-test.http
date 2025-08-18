@@ -71,4 +71,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 ### Test direct sur le service de notes
 GET http://localhost:8081/api/notes/patient/2
 
+### Test indirect sur le service de notes
+GET http://note-service:8081/api/notes/patient/2
+
 
