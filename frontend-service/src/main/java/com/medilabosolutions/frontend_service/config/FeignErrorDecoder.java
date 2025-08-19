@@ -17,16 +17,17 @@ public class FeignErrorDecoder implements ErrorDecoder {
     @Override
     public Exception decode(String methodKey, Response response) {
         log.error("Error Response: status={}, reason={}", response.status(), response.reason());
-        try {
-            String responseBody = new String(response.body().asInputStream().readAllBytes());
-            log.error("Detailed error response: {}", responseBody);
-        } catch (IOException e) {
-            log.error("Could not read response body", e);
+        if (response.body() != null) {
+            try {
+                String responseBody = new String(response.body().asInputStream().readAllBytes());
+                log.error("Detailed error response: {}", responseBody);
+            } catch (IOException e) {
+                log.error("Could not read response body", e);
+            }
+        } else {
+            log.error("Response body is null");
         }
 
         return defaultErrorDecoder.decode(methodKey, response);
     }
-
-
-
 }

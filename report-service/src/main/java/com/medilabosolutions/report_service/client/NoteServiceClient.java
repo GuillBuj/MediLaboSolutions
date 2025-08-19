@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "note-service", url = "${note.service.url:http://note-service:8081}")
+@FeignClient(name = "note-service")
 public interface NoteServiceClient {
 
     @GetMapping("/api/notes/patient/{id}")

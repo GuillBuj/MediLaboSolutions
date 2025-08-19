@@ -2,9 +2,7 @@ package com.medilabosolutions.note_service.controller;
 
 import com.medilabosolutions.note_service.dto.NoteCreateDTO;
 import com.medilabosolutions.note_service.dto.NoteDTO;
-import com.medilabosolutions.note_service.model.Note;
 import com.medilabosolutions.note_service.service.NoteService;
-import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,9 +26,15 @@ public class NoteController {
     }
 
     @GetMapping("/patient/{id}")
-    public ResponseEntity<List<NoteDTO>> getAllNotes(@PathVariable(name = "id", required = true) int id
+    public ResponseEntity<List<NoteDTO>> getAllNotesByPatientId(@PathVariable(name = "id", required = true) int id
     ) {
         log.info("Getting all notes for: {}", id);
         return ResponseEntity.ok(noteService.getAllNotesByPatientId(id));
+    }
+
+    @GetMapping("/delete-all")
+    public void deleteAllNotes() {
+        log.info("Deleting all notes");
+        noteService.deleteAllNotes();
     }
 }

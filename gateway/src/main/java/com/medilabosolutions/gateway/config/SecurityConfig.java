@@ -1,5 +1,6 @@
 package com.medilabosolutions.gateway.config;
 
+import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -25,7 +26,7 @@ public class SecurityConfig {
     private String jwtSecret;
 
     @Bean
-    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
@@ -41,20 +42,27 @@ public class SecurityConfig {
             ServerHttpRequest request = exchange.getRequest();
             String path = request.getPath().toString();
 
-            if (path.contains("/auth/login")) {
+            if (path.startsWith("/auth/login")) {
                 return chain.filter(exchange);
             }
 
+            String token;
             try {
-                String token = extractToken(request);
+                token = extractToken(request);
                 Jwts.parserBuilder()
                         .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
                         .build()
                         .parseClaimsJws(token);
+
+                // si on veut, on pourrait mettre l'utilisateur dans le SecurityContext
                 return chain.filter(exchange);
+
             } catch (Exception e) {
                 exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-                return exchange.getResponse().setComplete();
+                exchange.getResponse().getHeaders().add("Content-Type", "application/json");
+                byte[] bytes = "{\"error\":\"Unauthorized or invalid token\"}".getBytes();
+                DataBuffer buffer = exchange.getResponse().bufferFactory().wrap(bytes);
+                return exchange.getResponse().writeWith(Mono.just(buffer));
             }
         };
     }
@@ -64,6 +72,6 @@ public class SecurityConfig {
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             return authHeader.substring(7);
         }
-        throw new RuntimeException("Token manquant ou invalide");
+        throw new RuntimeException("Missing or invalid Authorization header");
     }
 }

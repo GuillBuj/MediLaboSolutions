@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "gateway-service",
-            url = "${gateway.url}",
-            configuration = {FeignClientConfig.class, FeignErrorDecoder.class}
+//@FeignClient(name = "gateway-service",
+//            url = "${gateway.url}",
+//            configuration = {FeignClientConfig.class, FeignErrorDecoder.class}
+//)
+@FeignClient(name = "note-service",
+        url = "${note.url}",
+        configuration = {FeignClientConfig.class, FeignErrorDecoder.class}
 )
 public interface NoteProxy {
 

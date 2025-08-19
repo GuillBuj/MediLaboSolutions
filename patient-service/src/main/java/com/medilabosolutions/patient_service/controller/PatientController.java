@@ -48,4 +48,9 @@ public class PatientController {
         patientService.deletePatient(id);
     }
 
+    @GetMapping("/delete-all")
+    public void deleteAllPatients() {
+        patientService.deleteAllPatients();
+    }
+
 }

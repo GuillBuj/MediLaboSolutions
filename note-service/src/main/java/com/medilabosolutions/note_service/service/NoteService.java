@@ -36,4 +36,8 @@ public class NoteService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteAllNotes() {
+        noteRepository.deleteAll();
+    }
+
 }

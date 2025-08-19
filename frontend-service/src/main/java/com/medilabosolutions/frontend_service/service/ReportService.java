@@ -1,31 +1,29 @@
 package com.medilabosolutions.frontend_service.service;
 
 import com.medilabosolutions.frontend_service.dto.NoteDTO;
+import com.medilabosolutions.frontend_service.dto.ReportDTO;
 import com.medilabosolutions.frontend_service.proxy.NoteProxy;
+import com.medilabosolutions.frontend_service.proxy.ReportProxy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class NoteService {
+public class ReportService {
 
-    private final NoteProxy noteProxy;
+    private final ReportProxy reportProxy;
 
-    public List<NoteDTO> getNotesForPatient(int patientId) {
+     public ReportDTO getPatientReport(int patientId) {
         log.info("Fetching notes for patient: {}", patientId);
         try {
-            List<NoteDTO> notes = noteProxy.getPatientHistory(patientId);
-            log.info("Retrieved {} notes", notes.size());
-            return notes;
+            return reportProxy.getPatientReport(patientId);
         } catch (Exception e) {
-            log.error("Error fetching notes: ", e);
+            log.error("Error fetching report: ", e);
             throw e;
         }
-}
+    }
 
 }

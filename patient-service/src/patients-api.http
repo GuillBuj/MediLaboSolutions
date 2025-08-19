@@ -108,12 +108,5 @@ Content-Type: application/json
   "phone": "499-555-6666"
 }
 
-###
 
-### ❌ DELETE Patient TestInDanger (ajuster l'ID si nécessaire)
-DELETE {{baseUrl}}/3
 
-###
-
-### ❌ DELETE Patient TestBorderline (ajuster l'ID si nécessaire)
-DELETE {{baseUrl}}/2

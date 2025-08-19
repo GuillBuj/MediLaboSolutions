@@ -1,14 +1,52 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Patients</title></head>
+<head>
+  <title>Patients</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
 <body>
-<h1>Liste des patients</h1>
-<ul>
-  <li th:each="patient : ${patients}">
-    <span th:text="${patient.firstName()} + ' ' + ${patient.lastName()}"></span>
-    <a th:href="@{'/patients/' + ${patient.id} + '/notes'}">Notes</a>
-    <a th:href="@{'/patients/' + ${patient.id} + '/report'}">Rapport</a>
-  </li>
-</ul>
+<div class="container mt-4">
+  <h1 class="mb-4">Liste des patients</h1>
+
+  <div class="mb-3">
+    <a th:href="@{/patients/create}" class="btn btn-primary">
+      <i class="bi bi-plus-circle"></i> Ajouter patient
+    </a>
+  </div>
+
+  <div class="list-group">
+    <div th:each="patient : ${patients}" class="list-group-item">
+      <div class="d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+          <span th:text="${patient.firstName() + ' ' + patient.lastName()}"></span>
+        </h5>
+        <div class="btn-group">
+          <a th:href="@{'/patients/' + ${patient.id()} + '/notes'}"
+             class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-journal-text"></i> Notes
+          </a>
+          <a th:href="@{'/patients/' + ${patient.id()} + '/report'}"
+             class="btn btn-outline-info btn-sm">
+            <i class="bi bi-file-text"></i> Rapport
+          </a>
+          <a th:href="@{/notes/add(patId=${patient.id()}, patient=${patient.firstName() + ' ' + patient.lastName()})}"
+             class="btn btn-outline-success btn-sm">
+            <i class="bi bi-plus"></i> Ajouter note
+          </a>
+          <a th:href="@{'/patients/' + ${patient.id()} + '/update'}"
+             class="btn btn-outline-primary btn-sm">
+            <i class="bi bi-pencil"></i> Modifier
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<!-- Bootstrap JS bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

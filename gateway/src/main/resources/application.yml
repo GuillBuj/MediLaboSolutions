@@ -12,24 +12,24 @@ spring:
         webflux:
           routes:
             - id: patient-service
-              uri: lb://patient-service:8080
+              uri: lb://patient-service
               predicates:
                 - Path=/api/patients/**
 
             - id: note-service
-              uri: lb://note-service:8081
+              uri: lb://note-service
               predicates:
                 - Path=/api/notes/**
 
             - id: report-service
-              uri: lb://report-service:8082
+              uri: lb://report-service
               predicates:
                 - Path=/api/report/**
 
-  security:
-    user:
-      name: admin
-      password: admin
+#  security:
+#    user:
+#      name: admin
+#      password: admin
 
 logging:
   level:

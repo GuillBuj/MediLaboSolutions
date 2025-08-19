@@ -8,27 +8,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping()
 public class NoteController {
 
-    private final WebClient webClient;
-
-    @Autowired
-    private NoteService noteService;
+    private final NoteService noteService;
 
     @GetMapping("/patients/{id}/notes")
     public String getPatientNotes(@PathVariable int id, Model model) {
-//        List<NoteDTO> notes = webClient.get()
-//                .uri("/api/notes/patient/{id}", id)
-//                .retrieve()
-//                .bodyToFlux(NoteDTO.class)
-//                .collectList()
-//                .block();
 
         List<NoteDTO> notes = noteService.getNotesForPatient(id);
 

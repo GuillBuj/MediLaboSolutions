@@ -52,4 +52,9 @@ public class PatientService {
                 .map(patientMapper::toPatientDTO)
                 .collect(Collectors.toList());
     }
+
+    public void deleteAllPatients() {
+        log.info("--- Deleting all patients");
+        patientRepository.deleteAll();
+    }
 }
