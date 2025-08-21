@@ -15,7 +15,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 {
   "firstName": "Alice",
   "lastName": "Durand",
-  "birthDate": "1985-05-10",
+  "birthdate": "1985-05-10",
   "gender": "F",
   "address": "45 rue des Lilas, Paris",
   "phone": "0612345678"
@@ -45,14 +45,17 @@ Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
 
 {
-  "patientId": "1",
-  "content": "Fumeur. Hémoglobine A1C anormale."
+  "patientId": "2",
+  "content": "Test post"
 }
 
 ### 🧪 Get report for patient
 GET http://localhost:8083/api/report/2
 Authorization: Basic YWRtaW46YWRtaW4=
 
+### Delete patient
+DELETE http://localhost:8083/api/patients/5
+Authorization: Basic YWRtaW46YWRtaW4=
 
 ### Obtenir un token JWT
 POST http://localhost:8083/auth/login

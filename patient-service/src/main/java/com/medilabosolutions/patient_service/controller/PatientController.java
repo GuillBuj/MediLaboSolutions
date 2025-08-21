@@ -21,9 +21,9 @@ public class PatientController {
 
     //TODO validation
     @PostMapping
-    public ResponseEntity<PatientCreateDTO> createPatient(@RequestBody PatientCreateDTO patientCreateDTO) {
+    public ResponseEntity<PatientDTO> createPatient(@RequestBody PatientCreateDTO patientCreateDTO) {
         log.info("Creating patient {}", patientCreateDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(patientService.savePatient(patientCreateDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(patientService.createPatient(patientCreateDTO));
     }
 
     @GetMapping

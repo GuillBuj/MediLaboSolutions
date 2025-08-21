@@ -1,9 +1,7 @@
 package com.medilabosolutions.frontend_service.service;
 
 import com.medilabosolutions.frontend_service.dto.PatientDTO;
-import com.medilabosolutions.frontend_service.dto.ReportDTO;
-import com.medilabosolutions.frontend_service.proxy.PatientProxy;
-import com.medilabosolutions.frontend_service.proxy.ReportProxy;
+import com.medilabosolutions.frontend_service.proxy.ProvPatientProxy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PatientService {
 
-    private final PatientProxy patientProxy;
+    private final ProvPatientProxy patientProxy;
 
     public List<PatientDTO> getAllPatients() {
         log.info("Fetching all patients");

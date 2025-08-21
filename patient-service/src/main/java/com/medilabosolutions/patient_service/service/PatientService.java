@@ -21,10 +21,11 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final PatientMapper patientMapper;
 
-    public PatientCreateDTO savePatient(PatientCreateDTO patientCreateDTO) {
-        log.info("--- Saving patient {}", patientCreateDTO);
+    public PatientDTO createPatient(PatientCreateDTO patientCreateDTO) {
+        log.info("--- Creating patient {}", patientCreateDTO);
         Patient savedPatient = patientRepository.save(patientMapper.toEntity(patientCreateDTO));
-        return patientMapper.toPatientCreateDTO(savedPatient);
+        log.info("--- Patient {} created", savedPatient);
+        return patientMapper.toPatientDTO(savedPatient);
     }
 
     public PatientUpdateDTO updatePatient(PatientUpdateDTO patientUpdateDTO) {

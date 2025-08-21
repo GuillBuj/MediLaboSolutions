@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/home")
 @RequiredArgsConstructor
-public class HomeController {
+@RequestMapping("/patients")
+public class ProvPatientController {
 
     private final PatientService patientService;
 
     @GetMapping
-    public String home(Model model) {
+    public String getPatients(Model model) {
 
         List<PatientDTO> patients = patientService.getAllPatients();
 

@@ -10,13 +10,13 @@
     <form th:action="@{/patients/create}" th:object="${patient}" method="post" class="needs-validation" novalidate>
         <div class="row g-3">
             <div class="col-md-6">
-                <label class="form-label">Prénom</label>
-                <input type="text" th:field="*{firstName}" class="form-control" required/>
+                <label class="form-label">Nom</label>
+                <input type="text" th:field="*{lastName}" class="form-control" required/>
             </div>
 
             <div class="col-md-6">
-                <label class="form-label">Nom</label>
-                <input type="text" th:field="*{lastName}" class="form-control" required/>
+                <label class="form-label">Prénom</label>
+                <input type="text" th:field="*{firstName}" class="form-control" required/>
             </div>
 
             <div class="col-md-6">
@@ -54,7 +54,7 @@
             <button type="submit" class="btn btn-primary">
                 <i class="bi bi-person-plus"></i> Créer
             </button>
-            <a href="/patients" class="btn btn-secondary">
+            <a href="/home" class="btn btn-secondary">
                 <i class="bi bi-arrow-left"></i> Retour
             </a>
         </div>

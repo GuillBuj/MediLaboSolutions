@@ -8,28 +8,32 @@ spring:
     web-application-type: reactive  # Force le mode WebFlux
   cloud:
     gateway:
-      server:
-        webflux:
-          routes:
-            - id: patient-service
-              uri: lb://patient-service
-              predicates:
-                - Path=/api/patients/**
+      routes:
+        - id: patient-service
+          uri: lb://patient-service
+          predicates:
+            - Path=/api/patients/**
+#          filters:
+#            - StripPrefix=1
 
-            - id: note-service
-              uri: lb://note-service
-              predicates:
-                - Path=/api/notes/**
+        - id: note-service
+          uri: lb://note-service
+          predicates:
+            - Path=/api/notes/**
+#          filters:
+#            - StripPrefix=1
 
-            - id: report-service
-              uri: lb://report-service
-              predicates:
-                - Path=/api/report/**
+        - id: report-service
+          uri: lb://report-service
+          predicates:
+            - Path=/api/report/**
+#          filters:
+#            - StripPrefix=1
 
-#  security:
-#    user:
-#      name: admin
-#      password: admin
+basic:
+  auth:
+    username: admin
+    password: admin
 
 logging:
   level:
@@ -38,7 +42,5 @@ logging:
     reactor.netty: DEBUG
     root: INFO
 
-
-
 jwt:
-  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30
+  secret: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NTc2MDAzNywiZXhwIjoxNzU1ODQ2NDM3fQ.vnzjKMwPmFm0PtT0MveWQWsWkavZuPHPDq669HDgvQBpNiTcQcZ8ywFZ_DpjObs6wIlA8vCTLpraHbKFPBjEFA

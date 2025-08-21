@@ -1,9 +1,7 @@
 package com.medilabosolutions.frontend_service.service;
 
-import com.medilabosolutions.frontend_service.dto.NoteDTO;
 import com.medilabosolutions.frontend_service.dto.ReportDTO;
-import com.medilabosolutions.frontend_service.proxy.NoteProxy;
-import com.medilabosolutions.frontend_service.proxy.ReportProxy;
+import com.medilabosolutions.frontend_service.proxy.ProvReportProxy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,7 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ReportService {
 
-    private final ReportProxy reportProxy;
+    private final ProvReportProxy reportProxy;
 
      public ReportDTO getPatientReport(int patientId) {
         log.info("Fetching notes for patient: {}", patientId);
