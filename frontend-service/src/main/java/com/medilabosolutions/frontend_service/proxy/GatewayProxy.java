@@ -17,6 +17,9 @@ public interface GatewayProxy {
     @GetMapping("/api/patients")
     List<PatientDTO> getAllPatients();
 
+    @GetMapping("/api/patients/{patientId}")
+    PatientDTO getPatient(@PathVariable int patientId);
+
     @GetMapping("/api/report/{patientId}")
     ReportDTO getPatientReport(@PathVariable int patientId);
 

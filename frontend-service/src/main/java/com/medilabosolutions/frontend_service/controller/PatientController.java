@@ -25,12 +25,16 @@ public class PatientController {
     public String getPatientReportAndNotes(@PathVariable int id, Model model) {
         log.info("getPatientReportAndNotes called");
 
+        PatientDTO patient = gatewayProxy.getPatient(id);
+        log.info("Patient {} retrieved: {}", id, patient);
+
         ReportDTO report = gatewayProxy.getPatientReport(id);
         log.info("Patient {} report: {}", id, report);
 
         List<NoteDTO> notes = gatewayProxy.getPatientNotes(id);
         log.info("Patient {} notes: {}", id, notes);
 
+        model.addAttribute("patient", patient);
         model.addAttribute("notes", notes);
         model.addAttribute("report", report);
         model.addAttribute("newNote", new NoteCreateDTO(id, report.fullName(), ""));
@@ -58,11 +62,7 @@ public class PatientController {
             return "patient-form";
         }
 
-//        gatewayProxy.createPatient(patientCreateDTO).id();
-//
-//        redirectAttributes.addFlashAttribute("successMessage", "Patient créé avec succès");
-//        return "redirect:/home";
-        int id=gatewayProxy.createPatient(patientCreateDTO).id().intValue();
+        int id = gatewayProxy.createPatient(patientCreateDTO).id().intValue();
         log.info("Patient {} created: {}", id, patientCreateDTO);
 
         return "redirect:/patient/" + id;
