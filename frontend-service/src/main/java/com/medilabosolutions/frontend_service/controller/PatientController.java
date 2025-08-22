@@ -77,6 +77,24 @@ public class PatientController {
         return "redirect:/patient/" + id;
     }
 
+    @PostMapping("/patient/{id}/update")
+    public String updatePatient(@PathVariable int id,
+                                @Valid PatientUpdateDTO patientUpdateDTO,
+                                BindingResult bindingResult,
+                                Model model,
+                                RedirectAttributes redirectAttributes) {
+        log.info("updatePatient called for: {}", patientUpdateDTO);
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la création du patient");
+            return "patient-form";
+        }
+
+        gatewayProxy.updatePatient(id, patientUpdateDTO);
+
+        return "redirect:/patient/" + id;
+    }
+
     @PostMapping("/patient/{id}/delete")
     public String deletePatient(@PathVariable int id) {
         log.info("deletePatient called");

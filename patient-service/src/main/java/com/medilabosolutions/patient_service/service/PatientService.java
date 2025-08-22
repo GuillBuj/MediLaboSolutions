@@ -28,9 +28,9 @@ public class PatientService {
         return patientMapper.toPatientDTO(savedPatient);
     }
 
-    public PatientUpdateDTO updatePatient(PatientUpdateDTO patientUpdateDTO) {
+    public PatientUpdateDTO updatePatient(Long id, PatientUpdateDTO patientUpdateDTO) {
         log.info("--- Updating patient {}", patientUpdateDTO);
-        Patient updatedPatient = patientRepository.save(patientMapper.toEntity(patientUpdateDTO));
+        Patient updatedPatient = patientRepository.save(patientMapper.toEntity(id, patientUpdateDTO));
         return patientMapper.toPatientUpdateDTO(updatedPatient);
     }
 

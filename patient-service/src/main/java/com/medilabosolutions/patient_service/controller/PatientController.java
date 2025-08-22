@@ -36,10 +36,10 @@ public class PatientController {
         return ResponseEntity.ok(patientService.getPatientById(id));
     }
 
-    @PutMapping
-    public ResponseEntity<PatientUpdateDTO> updatePatient(@RequestBody PatientUpdateDTO patientUpdateDTO) {
+    @PutMapping("/{id}")
+    public ResponseEntity<PatientUpdateDTO> updatePatient(@PathVariable Long id, @RequestBody PatientUpdateDTO patientUpdateDTO) {
         log.info("Updating patient {}", patientUpdateDTO);
-        return ResponseEntity.ok(patientService.updatePatient(patientUpdateDTO));
+        return ResponseEntity.ok(patientService.updatePatient(id, patientUpdateDTO));
     }
 
     @DeleteMapping("/{id}")

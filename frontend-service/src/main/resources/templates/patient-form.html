@@ -21,11 +21,12 @@
 
             <div class="col-md-6">
                 <label class="form-label">Date de naissance</label>
-                <input type="date" th:field="*{birthdate}" class="form-control" required/>
+                <input type="date" th:field="*{birthdate}" class="form-control"
+                       max="" th:attr="max=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required/>
             </div>
 
             <div class="col-md-6">
-                <label class="form-label">Genre (M/F)</label>
+                <label class="form-label">Sexe (M/F)</label>
                 <select th:field="*{gender}" class="form-select" required>
                     <option value="">Sélectionner...</option>
                     <option value="M">Masculin</option>
@@ -41,12 +42,12 @@
             <div class="col-md-6">
                 <label class="form-label">Téléphone</label>
                 <input type="tel" th:field="*{phone}" class="form-control"
-                       pattern="[0-9]{3}[-.]?[0-9]{3}[-.]?[0-9]{4}"
-                       placeholder="123-456-7890"
+                       pattern="[0-9]{10}" maxlength="10"
+                       placeholder="1234567890"
                        th:errorclass="is-invalid"/>
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('phone')}"
                      th:errors="*{phone}">Erreur</div>
-                <small class="form-text text-muted">Format: 123-456-7890 ou 1234567890</small>
+                <small class="form-text text-muted">Format: 1234567890</small>
             </div>
         </div>
 

@@ -35,11 +35,11 @@ public class PatientMapper {
         return patient;
     }
 
-    public Patient toEntity(PatientUpdateDTO dto) {
+    public Patient toEntity(Long id, PatientUpdateDTO dto) {
         if (dto == null) return null;
 
         Patient patient = new Patient();
-        patient.setId(dto.id());
+        patient.setId(id);
         patient.setFirstName(dto.firstName());
         patient.setLastName(dto.lastName());
         patient.setBirthdate(dto.birthdate());

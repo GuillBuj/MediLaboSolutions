@@ -26,6 +26,9 @@ public interface GatewayProxy {
     @GetMapping("/api/notes/patient/{patientId}")
     List<NoteDTO> getPatientNotes(@PathVariable int patientId);
 
+    @PutMapping("/api/patients/{patientId}")
+    PatientDTO updatePatient(@PathVariable int patientId, PatientUpdateDTO patient);
+
     @DeleteMapping("/api/patients/{patientId}")
     void deletePatient(@PathVariable int patientId);
 
