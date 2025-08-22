@@ -1,6 +1,7 @@
 package com.medilabosolutions.frontend_service.controller;
 
 import com.medilabosolutions.frontend_service.dto.PatientDTO;
+import com.medilabosolutions.frontend_service.proxy.GatewayProxy;
 import com.medilabosolutions.frontend_service.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,12 +16,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HomeController {
 
-    private final PatientService patientService;
+    private final GatewayProxy gatewayProxy;
 
     @GetMapping
     public String home(Model model) {
 
-        List<PatientDTO> patients = patientService.getAllPatients();
+        List<PatientDTO> patients = gatewayProxy.getAllPatients();
 
         model.addAttribute("patients", patients);
         return "patients";
