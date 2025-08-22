@@ -91,7 +91,7 @@ public class SecurityConfig {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
-                        .anyExchange().permitAll() // Notre filtre personnalisé gère l'authentification
+                        .anyExchange().permitAll()
                 )
                 .build();
     }

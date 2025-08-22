@@ -18,16 +18,6 @@ services:
     networks:
       - medilabo-net
 
-  eureka-server:
-    image: eureka-server
-    hostname: eureka-server  # Force le hostname dans le réseau Docker
-    environment:
-      - EUREKA_INSTANCE_HOSTNAME=eureka-server  # Override pour Eureka
-    ports:
-      - "8761:8761"
-    networks:
-      - medilabo-net
-
   mongodb:
     image: mongo:6
     container_name: mongodb
@@ -46,6 +36,21 @@ services:
     networks:
       - medilabo-net
   
+  eureka-server:
+    image: eureka-server
+    hostname: eureka-server  # Force le hostname dans le réseau Docker
+    environment:
+      - EUREKA_INSTANCE_HOSTNAME=eureka-server  # Override pour Eureka
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8761/actuator/health" ]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - medilabo-net
 
   patient-service:
     build: ./patient-service
@@ -56,9 +61,9 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/patientdb
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
-        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-        - EUREKA_INSTANCE_HOSTNAME=patient-service
-        - SPRING_APPLICATION_NAME=patient-service
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      EUREKA_INSTANCE_HOSTNAME: patient-service
+      SPRING_APPLICATION_NAME: patient-service
     ports:
       - "8080:8080"
     healthcheck:
@@ -69,18 +74,19 @@ services:
     networks:
         - medilabo-net
 
-
   note-service:
     build: ./note-service
     container_name: note-service
     depends_on:
       mongodb:
         condition: service_healthy
+      eureka-server:
+        condition: service_healthy
     environment:
       SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/notedb
-        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-        - EUREKA_INSTANCE_HOSTNAME=note-service
-        - SPRING_APPLICATION_NAME=note-service
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      EUREKA_INSTANCE_HOSTNAME: note-service
+      SPRING_APPLICATION_NAME: note-service
     ports:
       - "8081:8081"
     healthcheck:
@@ -97,6 +103,8 @@ services:
       patient-service:
         condition: service_healthy
       note-service:
+        condition: service_healthy
+      eureka-server:
         condition: service_healthy
     ports:
       - "8082:8082"
@@ -121,6 +129,8 @@ services:
         condition: service_healthy
       report-service:
         condition: service_healthy
+      eureka-server:
+        condition: service_healthy
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
       - EUREKA_INSTANCE_HOSTNAME=gateway
@@ -131,15 +141,17 @@ services:
       test: [ "CMD", "curl", "-f", "http://localhost:8083/actuator/health" ]
       interval: 20s
       timeout: 10s
-      retries: 10
+      retries: 5
     networks:
       - medilabo-net
 
   frontend-service:
     build: ./frontend-service
     depends_on:
-      - gateway
-      - eureka-server
+      gateway:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
       - EUREKA_INSTANCE_HOSTNAME=frontend-service
