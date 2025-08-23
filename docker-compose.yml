@@ -54,6 +54,8 @@ services:
 
   patient-service:
     build: ./patient-service
+    env_file:
+      - ./.env.docker
     depends_on:
       mysql:
         condition: service_healthy
@@ -76,6 +78,8 @@ services:
 
   note-service:
     build: ./note-service
+    env_file:
+      - ./.env.docker
     container_name: note-service
     depends_on:
       mongodb:
@@ -99,6 +103,8 @@ services:
 
   report-service:
     build: ./report-service
+    env_file:
+      - ./.env.docker
     depends_on:
       patient-service:
         condition: service_healthy
@@ -122,6 +128,8 @@ services:
 
   gateway:
     build: ./gateway
+    env_file:
+      - ./.env.docker
     depends_on:
       patient-service:
         condition: service_healthy
@@ -148,6 +156,8 @@ services:
 
   frontend-service:
     build: ./frontend-service
+    env_file:
+      - ./.env.docker
     depends_on:
       gateway:
         condition: service_healthy

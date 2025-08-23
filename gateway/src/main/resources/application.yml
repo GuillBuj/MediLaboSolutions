@@ -1,8 +1,10 @@
 spring:
+  config:
+    import: optional:file:.env
   application:
     name: gateway
   main:
-    web-application-type: reactive  # Force le mode WebFlux
+    web-application-type: reactive
   cloud:
     gateway:
       routes:
@@ -10,32 +12,24 @@ spring:
           uri: lb://patient-service
           predicates:
             - Path=/api/patients/**
-#          filters:
-#            - StripPrefix=1
-
         - id: note-service
           uri: lb://note-service
           predicates:
             - Path=/api/notes/**
-#          filters:
-#            - StripPrefix=1
-
         - id: report-service
           uri: lb://report-service
           predicates:
             - Path=/api/report/**
-#          filters:
-#            - StripPrefix=1
 
-basic:
-  auth:
-    username: admin
-    password: admin
+#basic:
+#  auth:
+#    username: admin
+#    password: admin
 
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://eureka-server:8761/eureka/}
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka/}
     register-with-eureka: true
     fetch-registry: true
   instance:
@@ -51,18 +45,6 @@ management:
     health:
       show-details: always
 
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: health,info
-#      base-path: /actuator
-#  endpoint:
-#    health:
-#      show-details: always
-#      probes:
-#        enabled: true
-
 server:
   port: 8083
 
@@ -74,4 +56,4 @@ logging:
     root: INFO
 
 jwt:
-  secret: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NTc2MDAzNywiZXhwIjoxNzU1ODQ2NDM3fQ.vnzjKMwPmFm0PtT0MveWQWsWkavZuPHPDq669HDgvQBpNiTcQcZ8ywFZ_DpjObs6wIlA8vCTLpraHbKFPBjEFA
+  secret: ${JWT_TOKEN:eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NTc2MDAzNywiZXhwIjoxNzU1ODQ2NDM3fQ.vnzjKMwPmFm0PtT0MveWQWsWkavZuPHPDq669HDgvQBpNiTcQcZ8ywFZ_DpjObs6wIlA8vCTLpraHbKFPBjEFA}

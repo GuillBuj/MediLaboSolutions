@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class JwtGlobalFilter implements GlobalFilter, Ordered {
 
+//    @Value("${JWT_TOKEN:eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NTc2MDAzNywiZXhwIjoxNzU1ODQ2NDM3fQ.vnzjKMwPmFm0PtT0MveWQWsWkavZuPHPDq669HDgvQBpNiTcQcZ8ywFZ_DpjObs6wIlA8vCTLpraHbKFPBjEFA}")
     @Value("${JWT_TOKEN}")
     private String jwtToken;
 
