@@ -2,7 +2,6 @@ package com.medilabosolutions.frontend_service.controller;
 
 import com.medilabosolutions.frontend_service.dto.PatientDTO;
 import com.medilabosolutions.frontend_service.proxy.GatewayProxy;
-import com.medilabosolutions.frontend_service.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

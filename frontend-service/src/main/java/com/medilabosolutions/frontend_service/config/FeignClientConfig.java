@@ -9,14 +9,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FeignClientConfig {
 
-//    @Value("${gateway.token}")
-//    private String token;
-
-//    @Bean
-//    public RequestInterceptor bearerTokenRequestInterceptor() {
-//        return requestTemplate -> requestTemplate.header("Authorization", "Bearer " + token);
-//    }
-
     @Bean
     public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
         return new BasicAuthRequestInterceptor("admin", "admin");

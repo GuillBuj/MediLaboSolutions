@@ -86,7 +86,7 @@ public class PatientController {
         log.info("updatePatient called for: {}", patientUpdateDTO);
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la création du patient");
+            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la modification du patient");
             return "patient-form";
         }
 

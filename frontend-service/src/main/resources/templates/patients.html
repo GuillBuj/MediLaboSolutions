@@ -29,24 +29,6 @@
             <span th:text="${patient.firstName() + ' ' + patient.lastName()}"></span>
           </a>
         </h5>
-        <div class="btn-group">
-          <a th:href="@{'/patients/' + ${patient.id()} + '/notes'}"
-             class="btn btn-outline-secondary btn-sm">
-            <i class="bi bi-journal-text"></i> Notes
-          </a>
-          <a th:href="@{'/patients/' + ${patient.id()} + '/report'}"
-             class="btn btn-outline-info btn-sm">
-            <i class="bi bi-file-text"></i> Rapport
-          </a>
-          <a th:href="@{/notes/add(patId=${patient.id()}, patient=${patient.firstName() + ' ' + patient.lastName()})}"
-             class="btn btn-outline-success btn-sm">
-            <i class="bi bi-plus"></i> Ajouter note
-          </a>
-          <a th:href="@{'/patients/' + ${patient.id()} + '/update'}"
-             class="btn btn-outline-primary btn-sm">
-            <i class="bi bi-pencil"></i> Modifier
-          </a>
-        </div>
       </div>
     </div>
   </div>
