@@ -45,6 +45,11 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
@@ -96,6 +101,12 @@
 			<artifactId>jjwt-jackson</artifactId> <!-- pour sérialisation JSON -->
 			<version>0.11.5</version>
 			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>

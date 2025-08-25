@@ -55,5 +55,5 @@ logging:
     reactor.netty: DEBUG
     root: INFO
 
-jwt:
-  secret: ${JWT_TOKEN:eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NTc2MDAzNywiZXhwIjoxNzU1ODQ2NDM3fQ.vnzjKMwPmFm0PtT0MveWQWsWkavZuPHPDq669HDgvQBpNiTcQcZ8ywFZ_DpjObs6wIlA8vCTLpraHbKFPBjEFA}
+#jwt:
+#  secret: ${JWT_TOKEN:eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NTc2MDAzNywiZXhwIjoxNzU1ODQ2NDM3fQ.vnzjKMwPmFm0PtT0MveWQWsWkavZuPHPDq669HDgvQBpNiTcQcZ8ywFZ_DpjObs6wIlA8vCTLpraHbKFPBjEFA}

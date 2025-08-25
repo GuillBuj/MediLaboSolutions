@@ -77,4 +77,39 @@ GET http://localhost:8081/api/notes/patient/2
 ### Test indirect sur le service de notes
 GET http://note-service:8081/api/notes/patient/2
 
+### 1️⃣ Test accès non authentifié
+GET http://localhost:8083/api/patients
+Accept: application/json
+
+### 2️⃣ Test accès avec user/password
+GET http://localhost:8083/api/patients
+Accept: application/json
+Authorization: Basic dXNlcjpwYXNzd29yZA==
+
+### 2️⃣ Test accès avec user/password
+GET http://localhost:8083/api/report/2
+Accept: application/json
+Authorization: Basic dXNlcjpwYXNzd29yZA==
+
+### 3️⃣ Test accès avec admin/admin
+GET http://localhost:8083/api/patients
+Accept: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+### 3️⃣ Test accès avec admin/admin
+GET http://localhost:8083/api/report/2
+Accept: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+### LOGIN
+POST http://localhost:8083/login
+Content-Type: application/x-www-form-urlencoded
+
+username=admin&password=admin
+
+### GET patients avec cookie de session
+GET http://localhost:8083/api/patients
+Accept: application/json
+Cookie: JSESSIONID=E0A46B0BEE2DD4090800609338092290
+
 
