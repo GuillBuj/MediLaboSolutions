@@ -21,11 +21,6 @@ spring:
           predicates:
             - Path=/api/report/**
 
-#basic:
-#  auth:
-#    username: admin
-#    password: admin
-
 eureka:
   client:
     service-url:
@@ -56,4 +51,4 @@ logging:
     root: INFO
 
 jwt:
-  secret: ${JWT_TOKEN:eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NTc2MDAzNywiZXhwIjoxNzU1ODQ2NDM3fQ.vnzjKMwPmFm0PtT0MveWQWsWkavZuPHPDq669HDgvQBpNiTcQcZ8ywFZ_DpjObs6wIlA8vCTLpraHbKFPBjEFA}
+  secret: ${JWT_SECRET}

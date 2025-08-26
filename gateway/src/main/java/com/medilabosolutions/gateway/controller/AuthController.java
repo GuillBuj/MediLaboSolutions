@@ -22,14 +22,10 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        // Pour test, vérifiez simplement si username et password sont "admin"
-        if ("admin".equals(request.getUsername()) &&
-                "admin".equals(request.getPassword())) {
-
+        if ("admin".equals(request.getUsername()) && "admin".equals(request.getPassword())) {
             String token = generateToken(request.getUsername());
             return ResponseEntity.ok(new TokenResponse(token));
         }
-
         return ResponseEntity.status(401).body("Invalid credentials");
     }
 
