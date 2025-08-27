@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 
-@Configuration
+//@Configuration
 @Slf4j
 public class FeignErrorDecoder implements ErrorDecoder {
 

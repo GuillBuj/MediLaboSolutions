@@ -22,6 +22,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/auth/login", "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated()
+                        //.anyRequest().permitAll()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")     // ta page login custom
+                        .defaultSuccessUrl("/home", true) // où aller après login
+                        .permitAll()
                 )
                 .build();
     }
@@ -31,7 +37,7 @@ public class SecurityConfig {
         UserDetails admin = User.builder()
                 .username("admin")
                 .password("{noop}admin") // MVP
-                .roles("USER")
+                .roles("ADMIN")
                 .build();
         UserDetails user = User.builder()
                 .username("user")

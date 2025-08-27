@@ -4,7 +4,9 @@ import com.medilabosolutions.frontend_service.dto.LoginRequestDTO;
 import com.medilabosolutions.frontend_service.dto.TokenResponse;
 import com.medilabosolutions.frontend_service.interceptor.JwtFeignInterceptor;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,10 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String loginSubmit(@ModelAttribute LoginRequestDTO request, Model model, HttpServletResponse servletResponse) {
+    public String loginSubmit(@ModelAttribute LoginRequestDTO request,
+                              Model model,
+                              HttpServletResponse servletResponse,
+                              HttpServletRequest servletRequest) {
         log.info("[LOGIN] loginSubmit called for user: {}", request.username());
 
         RestTemplate restTemplate = new RestTemplate();
@@ -50,6 +55,9 @@ public class LoginController {
             cookie.setMaxAge(24 * 60 * 60); // 24h
             servletResponse.addCookie(cookie);
 
+            // 👉 Stocker le token en session (pour Feign)
+            servletRequest.getSession().setAttribute("jwt", token);
+
             return "redirect:/home";
 
         } catch (Exception e) {
@@ -58,5 +66,25 @@ public class LoginController {
             return "login";
         }
     }
+
+//    @PostMapping("/logout")
+//    public String logout(HttpServletRequest request, HttpServletResponse response) {
+//        log.info("[LOGOUT] logout called");
+//
+//        // Supprimer le cookie JWT
+//        Cookie cookie = new Cookie("jwt", null);
+//        cookie.setHttpOnly(true);
+//        cookie.setPath("/");
+//        cookie.setMaxAge(0); // expire immédiatement
+//        response.addCookie(cookie);
+//
+//        // Invalider la session
+//        HttpSession session = request.getSession(false);
+//        if (session != null) {
+//            session.invalidate();
+//        }
+//
+//        return "redirect:/login";
+//    }
 }
 
