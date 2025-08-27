@@ -58,6 +58,7 @@ public class LoginController {
             // 👉 Stocker le token en session (pour Feign)
             servletRequest.getSession().setAttribute("jwt", token);
 
+            servletRequest.getSession().setAttribute("username", request.username());
             return "redirect:/home";
 
         } catch (Exception e) {
@@ -67,24 +68,24 @@ public class LoginController {
         }
     }
 
-//    @PostMapping("/logout")
-//    public String logout(HttpServletRequest request, HttpServletResponse response) {
-//        log.info("[LOGOUT] logout called");
-//
-//        // Supprimer le cookie JWT
-//        Cookie cookie = new Cookie("jwt", null);
-//        cookie.setHttpOnly(true);
-//        cookie.setPath("/");
-//        cookie.setMaxAge(0); // expire immédiatement
-//        response.addCookie(cookie);
-//
-//        // Invalider la session
-//        HttpSession session = request.getSession(false);
-//        if (session != null) {
-//            session.invalidate();
-//        }
-//
-//        return "redirect:/login";
-//    }
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        log.info("[LOGOUT] logout called");
+
+        // Supprimer le cookie JWT
+        Cookie cookie = new Cookie("jwt", null);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0); // expire immédiatement
+        response.addCookie(cookie);
+
+        // Invalider la session
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+
+        return "redirect:/login";
+    }
 }
 

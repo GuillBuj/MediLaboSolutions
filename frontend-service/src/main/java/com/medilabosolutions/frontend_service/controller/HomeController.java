@@ -3,6 +3,7 @@ package com.medilabosolutions.frontend_service.controller;
 import com.medilabosolutions.frontend_service.dto.PatientDTO;
 import com.medilabosolutions.frontend_service.proxy.GatewayProxy;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

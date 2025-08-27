@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
 <head></head>
 <body>
 <div th:fragment="mainNavbar">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
         <div class="container-fluid">
             <!-- Nom de l'application -->
-            <a class="navbar-brand" href="#">MediLab</a>
+            <a class="navbar-brand" href="#">MediLaboSolutions</a>
 
-            <!-- Boutons à droite -->
-            <div class="d-flex ms-auto">
-                <!-- Si utilisateur connecté, afficher Logout -->
-                <form th:if="${#httpServletRequest.getSession(false)?.getAttribute('jwt') != null}"
-                      th:action="@{/logout}" method="post">
-                    <button type="submit" class="btn btn-outline-danger">Logout</button>
-                </form>
 
-                <!-- Sinon afficher Login -->
-                <a th:if="${#httpServletRequest.getSession(false)?.getAttribute('jwt') == null}"
-                   th:href="@{/login}" class="btn btn-outline-primary">Login</a>
-            </div>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link" th:href="@{/login}">Login</a>
+                </li>
+                <li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()">
+                    <span class="navbar-text text-warning me-2" sec:authentication="name"></span>
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+
         </div>
     </nav>
 </div>
