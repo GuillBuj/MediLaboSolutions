@@ -1,35 +1,75 @@
 package com.medilabosolutions.gateway.config;
 
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
+import com.medilabosolutions.gateway.util.JwtValidator;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.gateway.filter.GatewayFilterChain;
-import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.WebFilter;
+import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
-
-import java.util.Arrays;
-import java.util.Base64;
+import java.util.List;
 
 
 @Component
 @Slf4j
-public class JwtAuthFilter implements GlobalFilter, Ordered {
+@RequiredArgsConstructor
+public class JwtAuthFilter implements WebFilter, Ordered {
+
+    private final JwtValidator jwtValidator;
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String path = exchange.getRequest().getPath().value();
-        log.info("[JWT FILTER] Request path: {}", path);
+    public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
 
-        // Tout passe, on ne fait plus aucune vérification
+        ServerHttpRequest req = exchange.getRequest();
+        String path = req.getURI().getPath();
+
+        String jwt = extractJwtFromCookies(req);
+        if (jwt != null) {
+
+            if (jwtValidator.isValid(jwt)) {
+                log.info("Valid JWT signature for request: {}", path);
+
+                String username = jwtValidator.extractClaim(jwt, "sub");
+
+                var auth = new UsernamePasswordAuthenticationToken(
+                        username,
+                        null,
+                        List.of(new SimpleGrantedAuthority("USER"),
+                                new SimpleGrantedAuthority("ADMIN")));
+
+                var ctx = new SecurityContextImpl(auth);
+
+                return chain.filter(exchange)
+                        .contextWrite(ReactiveSecurityContextHolder.withSecurityContext(Mono.just(ctx)));
+            }
+
+            log.warn("Invalid JWT signature for request: {}", path);
+            return redirect(exchange, "http://localhost:8084/login");
+        }
+
+        log.warn("No JWT token found in cookies for request: {}", path);
         return chain.filter(exchange);
+    }
+
+    private String extractJwtFromCookies(ServerHttpRequest req) {
+        return req.getCookies().getFirst("jwt") != null
+                ? req.getCookies().getFirst("jwt").getValue()
+                : null;
+    }
+
+    private Mono<Void> redirect(ServerWebExchange exchange, String url) {
+        exchange.getResponse().setStatusCode(HttpStatus.SEE_OTHER);
+        exchange.getResponse().getHeaders().set(HttpHeaders.LOCATION, url);
+        return exchange.getResponse().setComplete();
     }
 
     @Override
@@ -38,56 +78,3 @@ public class JwtAuthFilter implements GlobalFilter, Ordered {
     }
 }
 
-//@Component
-//@Slf4j
-//public class JwtAuthFilter implements GlobalFilter, Ordered {
-//    @Value("${jwt.secret}")
-//    private String jwtSecret;
-//
-//    private static final String[] OPEN_PATHS = {"/auth/login", "/actuator/**"};
-//
-//    @Override
-//    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-//        String path = exchange.getRequest().getPath().value();
-//        log.info("[JWT FILTER] Request path: {}", path);
-//
-//        // Autoriser les routes publiques
-//        if (Arrays.stream(OPEN_PATHS).anyMatch(path::startsWith)) {
-//            log.info("[JWT FILTER] Public path, no auth needed");
-//            return chain.filter(exchange);
-//        }
-//
-//        String authHeader = exchange.getRequest().getHeaders().getFirst("Authorization");
-//        log.info("[JWT FILTER] Authorization header: {}", authHeader);
-//
-//        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-//            log.warn("[JWT FILTER] Missing or invalid Authorization header");
-//            return unauthorized(exchange);
-//        }
-//
-//        String token = authHeader.substring(7);
-//
-//        try {
-//            Jwts.parserBuilder()
-//                    .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
-//                    .build()
-//                    .parseClaimsJws(token);
-//            log.info("[JWT FILTER] JWT is valid");
-//        } catch (JwtException e) {
-//            log.warn("[JWT FILTER] Invalid JWT: {}", e.getMessage());
-//            return unauthorized(exchange);
-//        }
-//
-//        return chain.filter(exchange);
-//    }
-//
-//    private Mono<Void> unauthorized(ServerWebExchange exchange) {
-//        exchange.getResponse().setStatusCode(org.springframework.http.HttpStatus.UNAUTHORIZED);
-//        return exchange.getResponse().setComplete();
-//    }
-//
-//    @Override
-//    public int getOrder() {
-//        return -1; // priorité haute
-//    }
-//}

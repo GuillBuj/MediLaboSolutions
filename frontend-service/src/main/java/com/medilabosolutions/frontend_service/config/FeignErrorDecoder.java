@@ -1,14 +1,11 @@
 package com.medilabosolutions.frontend_service.config;
 
-import feign.FeignException;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 
-//@Configuration
 @Slf4j
 public class FeignErrorDecoder implements ErrorDecoder {
 
