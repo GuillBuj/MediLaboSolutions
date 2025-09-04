@@ -143,7 +143,7 @@ services:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
       - EUREKA_INSTANCE_HOSTNAME=gateway
       - SPRING_APPLICATION_NAME=gateway
-      - JWT_TOKEN=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NTg4Nzc1MCwiZXhwIjoxNzU1OTc0MTUwfQ.qf1vek3cvyPL2DgGchycKCZdFxYi7Pvvm4jKZW3GmhvtpoFTSLy37_fOzHsani1ivpQv_fdAhgzf7AfFkbbRzA
+#      - JWT_TOKEN=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NTg4Nzc1MCwiZXhwIjoxNzU1OTc0MTUwfQ.qf1vek3cvyPL2DgGchycKCZdFxYi7Pvvm4jKZW3GmhvtpoFTSLy37_fOzHsani1ivpQv_fdAhgzf7AfFkbbRzA
     ports:
       - "8083:8083"
     healthcheck:
