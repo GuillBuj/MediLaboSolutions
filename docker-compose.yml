@@ -8,8 +8,6 @@ services:
       MYSQL_DATABASE: patientdb
     volumes:
       - ./scripts/mysql-init.sql:/docker-entrypoint-initdb.d/mysql-init.sql
-    ports:
-      - "3307:3306"
     healthcheck:
       test: [ "CMD-SHELL", "mysqladmin ping -h localhost -u root -p$MYSQL_ROOT_PASSWORD" ]
       interval: 5s
@@ -26,8 +24,6 @@ services:
       MONGO_INITDB_DATABASE: notedb
     volumes:
       - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-    ports:
-      - "27017:27017"
     healthcheck:
         test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
         interval: 15s
@@ -38,9 +34,9 @@ services:
   
   eureka-server:
     image: eureka-server
-    hostname: eureka-server  # Force le hostname dans le réseau Docker
+    hostname: eureka-server
     environment:
-      - EUREKA_INSTANCE_HOSTNAME=eureka-server  # Override pour Eureka
+      - EUREKA_INSTANCE_HOSTNAME=eureka-server
     ports:
       - "8761:8761"
     healthcheck:
@@ -66,8 +62,6 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
       EUREKA_INSTANCE_HOSTNAME: patient-service
       SPRING_APPLICATION_NAME: patient-service
-    ports:
-      - "8080:8080"
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
       interval: 15s
@@ -91,8 +85,6 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
       EUREKA_INSTANCE_HOSTNAME: note-service
       SPRING_APPLICATION_NAME: note-service
-    ports:
-      - "8081:8081"
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8081/actuator/health" ]
       interval: 15s
@@ -112,8 +104,6 @@ services:
         condition: service_healthy
       eureka-server:
         condition: service_healthy
-    ports:
-      - "8082:8082"
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
       - EUREKA_INSTANCE_HOSTNAME=report-service
@@ -143,7 +133,6 @@ services:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
       - EUREKA_INSTANCE_HOSTNAME=gateway
       - SPRING_APPLICATION_NAME=gateway
-#      - JWT_TOKEN=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NTg4Nzc1MCwiZXhwIjoxNzU1OTc0MTUwfQ.qf1vek3cvyPL2DgGchycKCZdFxYi7Pvvm4jKZW3GmhvtpoFTSLy37_fOzHsani1ivpQv_fdAhgzf7AfFkbbRzA
     ports:
       - "8083:8083"
     healthcheck:
