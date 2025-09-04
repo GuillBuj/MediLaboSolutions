@@ -108,7 +108,7 @@ public class ReportService {
      * @return List of NoteDTOs for the patient
      * @throws ResourceNotFoundException if notes cannot be retrieved
      */
-    private List<NoteDTO> getNotesByPatientId(Long patientId) {
+    protected List<NoteDTO> getNotesByPatientId(Long patientId) {
         log.info("----- Getting notes for patient {}", patientId);
 
         ResponseEntity<List<NoteDTO>> response = noteServiceClient.getNotesByPatientId(patientId);
@@ -126,7 +126,7 @@ public class ReportService {
      * @return PatientDTO containing patient information
      * @throws ResourceNotFoundException if patient cannot be retrieved
      */
-    private PatientDTO getPatientById(Long patientId) {
+    protected PatientDTO getPatientById(Long patientId) {
         log.info("----- Getting patient {}", patientId);
 
         ResponseEntity<PatientDTO> response = patientServiceClient.getPatientById(patientId);
