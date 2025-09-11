@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/MediLaboSolutions.iml" filepath="$PROJECT_DIR$/.idea/MediLaboSolutions.iml" />
       <module fileurl="file://$PROJECT_DIR$/medi-labo-parent.iml" filepath="$PROJECT_DIR$/medi-labo-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/note-service/note-service.iml" filepath="$PROJECT_DIR$/note-service/note-service.iml" />
     </modules>
   </component>
 </project>

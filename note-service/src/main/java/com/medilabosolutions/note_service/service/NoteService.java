@@ -59,6 +59,11 @@ public class NoteService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Deletes a specific note by its ID.
+     *
+     * @param id The ID of the note to delete
+     */
     public void deleteNoteById(String id) {
         log.info("Deleting note with ID: {}", id);
         noteRepository.deleteById(id);

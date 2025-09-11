@@ -50,6 +50,12 @@ public class NoteController {
         return ResponseEntity.ok(noteService.getAllNotesByPatientId(id));
     }
 
+    /**
+     * Deletes a specific note by its ID.
+     * DELETE /api/notes/{id}
+     *
+     * @param id The ID of the note to delete
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteNote(@PathVariable String id) {
