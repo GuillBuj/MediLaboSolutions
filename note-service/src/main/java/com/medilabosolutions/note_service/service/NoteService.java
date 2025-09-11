@@ -59,6 +59,11 @@ public class NoteService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteNoteById(String id) {
+        log.info("Deleting note with ID: {}", id);
+        noteRepository.deleteById(id);
+    }
+
     /**
      * Deletes all notes from the system.
      * Primarily used for testing and cleanup purposes.

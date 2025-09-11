@@ -77,6 +77,15 @@ public class PatientController {
         return "redirect:/patient/" + id;
     }
 
+    @PostMapping("/patient/{patientId}/delete-note/{noteId}")
+    public String deleteNote(@PathVariable int patientId, @PathVariable String noteId){
+        log.info("deleteNote called for noteId={}", noteId);
+
+        gatewayProxy.deleteNote(noteId);
+
+        return "redirect:/patient/" + patientId;
+    }
+
     @PostMapping("/patient/{id}/update")
     public String updatePatient(@PathVariable int id,
                                 @Valid PatientUpdateDTO patientUpdateDTO,

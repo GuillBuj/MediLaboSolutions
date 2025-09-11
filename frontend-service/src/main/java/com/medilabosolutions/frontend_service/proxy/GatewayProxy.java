@@ -39,5 +39,7 @@ public interface GatewayProxy {
     @PostMapping("/api/notes")
     NoteDTO createNote(NoteCreateDTO note);
 
+    @DeleteMapping("/api/notes/{noteId}")
+    void deleteNote(@PathVariable String noteId);
 }
 
