@@ -10,11 +10,20 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 
+/**
+ * Feign RequestInterceptor that adds a JWT cookie to outgoing requests.
+ * Retrieves the JWT from the current HTTP request and appends it to the Feign request headers.
+ */
 @Slf4j
 public class JwtFeignInterceptor implements RequestInterceptor {
 
     private static final String COOKIE_NAME = "jwt";
 
+    /**
+     * Intercepts the Feign request and adds the JWT cookie if present.
+     *
+     * @param requestTemplate the Feign request template to modify
+     */
     @Override
     public void apply(RequestTemplate requestTemplate) {
         log.info("*-*-*-*-* JwtFeignInterceptor");
@@ -30,7 +39,6 @@ public class JwtFeignInterceptor implements RequestInterceptor {
 
         for (Cookie c : request.getCookies()) {
             if (COOKIE_NAME.equals(c.getName())) {
-
                 String newCookie = COOKIE_NAME + '=' + c.getValue();
 
                 if (requestTemplate.headers().containsKey("Cookie")) {
