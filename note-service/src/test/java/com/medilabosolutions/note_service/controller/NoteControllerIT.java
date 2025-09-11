@@ -3,12 +3,7 @@ package com.medilabosolutions.note_service.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.medilabosolutions.note_service.dto.NoteCreateDTO;
 import com.medilabosolutions.note_service.dto.NoteDTO;
-import de.flapdoodle.embed.mongo.MongodExecutable;
-import de.flapdoodle.embed.mongo.MongodStarter;
-import de.flapdoodle.embed.mongo.config.MongodConfig;
-import de.flapdoodle.embed.mongo.config.Net;
-import de.flapdoodle.embed.mongo.distribution.Version;
-import de.flapdoodle.embed.process.runtime.Network;
+
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,9 +11,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.io.IOException;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.containers.MongoDBContainer;
+
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
+@Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class NoteControllerIT {
 
@@ -42,24 +43,12 @@ class NoteControllerIT {
 
     private NoteCreateDTO sampleNote;
 
-    private MongodExecutable mongodExecutable;
+    @Container
+    static final MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:6.0");
 
-    @BeforeAll
-    void setUpEmbeddedMongo() throws IOException {
-        int port = 27017;
-        MongodConfig mongodConfig = MongodConfig.builder()
-                .version(Version.Main.PRODUCTION)
-                .net(new Net(port, Network.localhostIsIPv6()))
-                .build();
-        mongodExecutable = MongodStarter.getDefaultInstance().prepare(mongodConfig);
-        mongodExecutable.start();
-    }
-
-    @AfterAll
-    void stopEmbeddedMongo() {
-        if (mongodExecutable != null) {
-            mongodExecutable.stop();
-        }
+    @DynamicPropertySource
+    static void configureProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
     }
 
     @BeforeEach
