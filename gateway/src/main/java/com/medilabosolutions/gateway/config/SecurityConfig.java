@@ -15,8 +15,6 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    //private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-
     private final JwtAuthFilter jwtAuthFilter;
 
     @Bean

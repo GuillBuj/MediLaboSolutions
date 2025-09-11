@@ -91,12 +91,18 @@
 			<version>${mapstruct.version}</version>
 		</dependency>
 
-		<!-- Testing -->
+		<!-- Dépendances de test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
@@ -187,10 +193,17 @@
 
 			<!-- Surefire Plugin for testing -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.1.2</version>
-			</plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>3.2.5</version>
+			<configuration>
+				<includes>
+					<include>**/*IT.java</include>
+					<include>**/*Test.java</include>
+					<include>**/*Tests.java</include>
+				</includes>
+			</configuration>
+		</plugin>
 		</plugins>
 	</build>
 

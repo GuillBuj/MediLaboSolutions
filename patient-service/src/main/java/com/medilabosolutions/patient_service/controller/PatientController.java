@@ -86,7 +86,6 @@ public class PatientController {
         patientService.deletePatient(id);
     }
 
-    //todo: supp
     /**
      * Deletes all patients from the system (primarily for testing purposes).
      * GET /api/patients/delete-all
