@@ -91,7 +91,7 @@ You can use your own installations or start just the databases from the Docker C
   - the core services(patient-service, note-service and report-service)
   - gateway-service
   - frontend-service.
-  - 
+  
 - Access the application:
   - Frontend Application: http://localhost:8084
   - API Gateway: http://localhost:8083
@@ -115,4 +115,24 @@ You can use your own installations or start just the databases from the Docker C
   [📘 Browse Javadoc](https://GuillBuj.github.io/P8-TourGuide/javadoc/index.html)
 
 ---
+## 🌱 Green Code Recommendations
 
+**🚀 Recommended Practices:**
+
+- **Optimize Algorithm Complexity**: Prefer O(n) over O(n²) algorithms
+- **Implement Efficient Caching**: Reduce redundant database queries and API calls
+- **Use Connection Pooling**: Optimize database connections
+- **Enable GZIP Compression**: Reduce network payload size
+- **Implement Pagination**: Limit data transfer for large datasets
+- **Use Lightweight Base Images**: Optimize Docker container size
+- **Clean Unused Dependencies**: Reduce application footprint
+- **Configure Resource Limits**: Set memory and CPU limits in containers
+- **Implement Auto-scaling**: Scale services based on actual demand
+- **Schedule Batch Processing**: Run heavy jobs during off-peak hours
+- **Monitor Energy Consumption**: Track resource usage metrics
+- **Use CDN for Static Assets**: Reduce latency and bandwidth
+- **Optimize Database Indexing**: Improve query performance
+- **Implement Sleep Modes**: Reduce resource consumption during inactivity
+- **Choose Green Hosting Providers**: Prefer carbon-neutral cloud providers
+
+*These practices help reduce the digital carbon footprint while maintaining application performance and reliability.*
