@@ -14,13 +14,13 @@
 
 This project is a Type 2 Diabetes risk screening application developed for healthcare clinics and private practices. The application enables professionals to:
 
-Securely manage patient records
+- Securely manage patient records
 
-Record and access clinical notes from practitioners
+- Record and access clinical notes from practitioners
 
-Generate automated diabetes risk assessments based on patient data and medical notes
+- Generate automated diabetes risk assessments based on patient data and medical notes
 
-Access a clean, intuitive web interface
+- Access a clean, intuitive web interface
 
 ---
 
