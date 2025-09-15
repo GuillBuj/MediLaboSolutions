@@ -136,3 +136,14 @@ You can use your own installations or start just the databases from the Docker C
 - **Choose Green Hosting Providers**: Prefer carbon-neutral cloud providers
 
 *These practices help reduce the digital carbon footprint while maintaining application performance and reliability.*
+
+---
+### 🗂️ Database & 3NF Principles
+
+The ideal database schema aims to comply with **Third Normal Form (3NF)** principles to ensure data integrity.
+
+**Theoretical 3NF Principles (Our Guideline):**
+- **Prime Attribute Dependency:** Non-key attributes should depend only on the primary key.
+- **Transitive Dependency Removal:** Non-key attributes should be independent of each other.
+- **Data Atomicity:** Values stored in columns should be atomic.
+- **Referential Integrity:** Relationships should be enforced via foreign keys.
