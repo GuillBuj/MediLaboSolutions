@@ -106,7 +106,9 @@ Steps
   [📊 View Report](https://GuillBuj.github.io/MediLaboSolutions/jacoco/index.html)
 
 - ✅ **Unit Test Report (Surefire)**:  
-  [🧪 View Results](https://GuillBuj.github.io/MediLaboSolutions/target-patient/surefire-report/surefire.html)
+[🧪 patient-service](https://GuillBuj.github.io/MediLaboSolutions/target-patient/surefire-report/surefire.html)
+[🧪 note-service](https://GuillBuj.github.io/MediLaboSolutions/target-note/surefire-report/surefire.html)
+[🧪 report-service](https://GuillBuj.github.io/MediLaboSolutions/target-report/surefire-report/surefire.html)
 
 - 📚 **Javadoc Documentation**:  
   [📘 Browse Javadoc](https://GuillBuj.github.io/MediLaboSolutions/docs/index.html)
