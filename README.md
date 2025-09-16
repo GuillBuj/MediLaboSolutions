@@ -54,11 +54,11 @@ The application follows a microservices architecture with the following componen
 The easiest way to run the entire ecosystem is with Docker Compose.
 
 - Clone the repository:
-git clone https://github.com/GuillBuj/MediLaboSolutions.git
-cd MediLaboSolutions
+  git clone https://github.com/GuillBuj/MediLaboSolutions.git
+  cd MediLaboSolutions
 
 - Start all services:
-docker-compose up -d
+  docker-compose up -d
 
 - Access the application:
   -Frontend Application: http://localhost:8084
@@ -76,43 +76,44 @@ A local MongoDB server running (or adjust application.properties for your connec
 Steps
 
 - Clone the repository:
-git clone https://github.com/GuillBuj/MediLaboSolutions.git
-cd MediLaboSolutions
+  git clone https://github.com/GuillBuj/MediLaboSolutions.git
+  cd MediLaboSolutions
 
 - Build the project and install all dependencies:
-It is highly recommended to run a clean install first. This ensures a fresh build, downloads all dependencies, and installs the modules to your local Maven repository.
-mvn clean install
+  It is highly recommended to run a clean install first. This ensures a fresh build, downloads all dependencies, and installs the modules to your local Maven repository.
+  mvn clean install
 
 - Start the databases.
-You can use your own installations or start just the databases from the Docker Compose file(docker-compose up mysql-db mongodb -d)
+  You can use your own installations or start just the databases from the Docker Compose file(docker-compose up mysql-db mongodb -d)
 
 - Run the microservices in the following order:
-  - eureka-server
-  - the core services(patient-service, note-service and report-service)
-  - gateway-service
-  - frontend-service.
-  
+    - eureka-server
+    - the core services(patient-service, note-service and report-service)
+    - gateway-service
+    - frontend-service.
+
 - Access the application:
-  - Frontend Application: http://localhost:8084
-  - API Gateway: http://localhost:8083
-  - Report Service API: http://localhost:8082
-  - Note Service API: http://localhost:8081
-  - Patient Service API: http://localhost:8080
-  - Eureka Server: http://localhost:8761
+    - Frontend Application: http://localhost:8084
+    - API Gateway: http://localhost:8083
+    - Report Service API: http://localhost:8082
+    - Note Service API: http://localhost:8081
+    - Patient Service API: http://localhost:8080
+    - Eureka Server: http://localhost:8761
 
 ## 🚀 Live Artifacts
 
-- 📥 **Latest JAR file**:  
-  [⬇️ Download `TourGuide.jar`](https://github.com/GuillBuj/P8-TourGuide/releases/latest/download/TourGuide-1.0-SNAPSHOT.jar)
-
 - 📈 **Code Coverage (JaCoCo)**:  
-  [📊 View Report](https://GuillBuj.github.io/P8-TourGuide/jacoco/index.html)
+  [📊 patient-service](https://GuillBuj.github.io/MediLaboSolutions/target-patient/site/jacoco/index.html)
+  [📊 note-service](https://GuillBuj.github.io/MediLaboSolutions/target-note/site/jacoco/index.html)
+  [📊 report-service](https://GuillBuj.github.io/MediLaboSolutions/target-report/site/jacoco/index.html)
 
 - ✅ **Unit Test Report (Surefire)**:  
-  [🧪 View Results](https://GuillBuj.github.io/P8-TourGuide/surefire/surefire.html)
+[🧪 patient-service](https://GuillBuj.github.io/MediLaboSolutions/target-patient/surefire-reports/surefire.html)
+[🧪 note-service](https://GuillBuj.github.io/MediLaboSolutions/target-note/surefire-reports/surefire.html)
+[🧪 report-service](https://GuillBuj.github.io/MediLaboSolutions/target-report/surefire-reports/surefire.html)
 
 - 📚 **Javadoc Documentation**:  
-  [📘 Browse Javadoc](https://GuillBuj.github.io/P8-TourGuide/javadoc/index.html)
+  [📘 Browse Javadoc](https://GuillBuj.github.io/MediLaboSolutions/docs/index.html)
 
 ---
 ## 🌱 Green Code Recommendations
