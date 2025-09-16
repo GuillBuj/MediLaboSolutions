@@ -104,8 +104,8 @@ Steps
 
 - 📈 **Code Coverage (JaCoCo)**:  
   [📊 patient-service](https://GuillBuj.github.io/MediLaboSolutions/site-patient/jacoco/index.html)
-  [📊 note-service](https://GuillBuj.github.io/MediLaboSolutions/site-note/jacoco/index.html)[📊 patient-service]
-  [📊 report-service](https://GuillBuj.github.io/MediLaboSolutions/report-patient/jacoco/index.html)
+  [📊 note-service](https://GuillBuj.github.io/MediLaboSolutions/site-note/jacoco/index.html)
+  [📊 report-service](https://GuillBuj.github.io/MediLaboSolutions/site-report/jacoco/index.html)
 
 - ✅ **Unit Test Report (Surefire)**:  
 [🧪 patient-service](https://GuillBuj.github.io/MediLaboSolutions/site-patient/surefire-report.html)
