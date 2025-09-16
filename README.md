@@ -100,13 +100,15 @@ Steps
     - Patient Service API: http://localhost:8080
     - Eureka Server: http://localhost:8761
 
-## 🚀 Coverage / Documentation
+## 🚀 Live Artifacts
 
 - 📈 **Code Coverage (JaCoCo)**:  
-  [📊 View Report](https://GuillBuj.github.io/MediLaboSolutions/docs/target-patient/jacoco/index.html)
+  [📊 View Report](https://GuillBuj.github.io/MediLaboSolutions/jacoco/index.html)
 
 - ✅ **Unit Test Report (Surefire)**:  
-  [🧪 View Results](https://GuillBuj.github.io/MediLaboSolutions/docs/target-patient/surefire-report/surefire.html)
+[🧪 patient-service](https://GuillBuj.github.io/MediLaboSolutions/target-patient/surefire-report/surefire.html)
+[🧪 note-service](https://GuillBuj.github.io/MediLaboSolutions/target-note/surefire-report/surefire.html)
+[🧪 report-service](https://GuillBuj.github.io/MediLaboSolutions/target-report/surefire-report/surefire.html)
 
 - 📚 **Javadoc Documentation**:  
   [📘 Browse Javadoc](https://GuillBuj.github.io/MediLaboSolutions/docs/index.html)
