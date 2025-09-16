@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReportService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">report-service</a> &gt; <a href="index.source.html" class="el_package">com.medilabosolutions.report_service.service</a> &gt; <span class="el_source">ReportService.java</span></div><h1>ReportService.java</h1><pre class="source lang-java linenums">package com.medilabosolutions.report_service.service;
+
+import com.medilabosolutions.report_service.client.NoteServiceClient;
+import com.medilabosolutions.report_service.client.PatientServiceClient;
+import com.medilabosolutions.report_service.constants.TriggerConstants;
+import com.medilabosolutions.report_service.dto.NoteDTO;
+import com.medilabosolutions.report_service.dto.PatientDTO;
+import com.medilabosolutions.report_service.dto.ReportDTO;
+import com.medilabosolutions.report_service.exception.ResourceNotFoundException;
+import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Service for generating patient risk assessment reports.
+ * Analyzes patient data and notes to determine diabetes risk level.
+ */
+@Service
+<span class="fc" id="L26">@AllArgsConstructor</span>
+<span class="fc" id="L27">@Slf4j</span>
+public class ReportService {
+
+    private final PatientServiceClient patientServiceClient;
+    private final NoteServiceClient noteServiceClient;
+
+    /**
+     * Generates a diabetes risk assessment report for a patient.
+     * Combines patient information with note analysis to determine risk level.
+     *
+     * @param patientId The ID of the patient to generate the report for
+     * @return ReportDTO containing patient information and calculated risk assessment
+     * @throws ResourceNotFoundException if patient or notes cannot be retrieved
+     */
+    public ReportDTO generateReport(Long patientId) {
+<span class="fc" id="L42">        log.info(&quot;----- Generating report for patient {}&quot;, patientId);</span>
+
+<span class="fc" id="L44">        PatientDTO patient = getPatientById(patientId);</span>
+<span class="fc" id="L45">        List&lt;NoteDTO&gt; notes = getNotesByPatientId(patientId);</span>
+
+<span class="fc" id="L47">        int age = Period.between(patient.birthdate(), LocalDate.now()).getYears();</span>
+<span class="fc" id="L48">        String gender = patient.gender();</span>
+
+<span class="fc" id="L50">        String allNotes = notes.stream()</span>
+<span class="fc" id="L51">                .map(NoteDTO::note)</span>
+<span class="fc" id="L52">                .collect(Collectors.joining(&quot; &quot;))</span>
+<span class="fc" id="L53">                .toLowerCase();</span>
+
+<span class="fc" id="L55">        int triggerCount = (int) TriggerConstants.TRIGGERS.stream()</span>
+<span class="fc" id="L56">                .map(String::toLowerCase)</span>
+<span class="fc" id="L57">                .filter(allNotes::contains)</span>
+<span class="fc" id="L58">                .count();</span>
+
+<span class="fc" id="L60">        String riskLevel = evaluateRisk(age, gender, triggerCount);</span>
+
+<span class="fc" id="L62">        return new ReportDTO(</span>
+<span class="fc" id="L63">                patient.id(),</span>
+<span class="fc" id="L64">                patient.firstName() + &quot; &quot; + patient.lastName(),</span>
+                age,
+                gender,
+                riskLevel
+        );
+    }
+
+    /**
+     * Evaluates diabetes risk based on age, gender, and trigger word count.
+     * Implements medical risk assessment rules.
+     *
+     * @param age Patient's age in years
+     * @param gender Patient's gender
+     * @param triggerCount Number of trigger words found in patient notes
+     * @return String representing the risk level (&quot;None&quot;, &quot;Borderline&quot;, &quot;In Danger&quot;, &quot;Early onset&quot;)
+     */
+    private String evaluateRisk(int age, String gender, int triggerCount) {
+<span class="fc" id="L81">        log.info(&quot;----- Evaluating risk&quot;);</span>
+
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (triggerCount == 0) return &quot;None&quot;;</span>
+
+<span class="fc bfc" id="L85" title="All 6 branches covered.">        if (triggerCount &gt;= 2 &amp;&amp; triggerCount &lt;= 5 &amp;&amp; age &gt; 30)</span>
+<span class="fc" id="L86">            return &quot;Borderline&quot;;</span>
+
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (age &lt; 30) {</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">            if (gender.equalsIgnoreCase(&quot;M&quot;)) {</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">                if (triggerCount &gt;= 5) return &quot;Early onset&quot;;</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">                if (triggerCount &gt;= 3) return &quot;In Danger&quot;;</span>
+            } else {
+<span class="fc bfc" id="L93" title="All 2 branches covered.">                if (triggerCount &gt;= 7) return &quot;Early onset&quot;;</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">                else if (triggerCount &gt;= 4) return &quot;In Danger&quot;;</span>
+            }
+        } else {
+<span class="fc bfc" id="L97" title="All 2 branches covered.">            if (triggerCount &gt;= 8) return &quot;Early onset&quot;;</span>
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">            if (triggerCount &gt;= 6) return &quot;In Danger&quot;;</span>
+        }
+
+<span class="fc" id="L101">        return &quot;None&quot;;</span>
+    }
+
+    /**
+     * Retrieves all notes for a specific patient from the notes service.
+     *
+     * @param patientId The ID of the patient
+     * @return List of NoteDTOs for the patient
+     * @throws ResourceNotFoundException if notes cannot be retrieved
+     */
+    protected List&lt;NoteDTO&gt; getNotesByPatientId(Long patientId) {
+<span class="fc" id="L112">        log.info(&quot;----- Getting notes for patient {}&quot;, patientId);</span>
+
+<span class="fc" id="L114">        ResponseEntity&lt;List&lt;NoteDTO&gt;&gt; response = noteServiceClient.getNotesByPatientId(patientId);</span>
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        if (response.getStatusCode().is2xxSuccessful()) {</span>
+<span class="fc" id="L116">            return response.getBody();</span>
+        } else {
+<span class="fc" id="L118">            throw new ResourceNotFoundException(&quot;Erreur lors de la récupération des notes&quot;);</span>
+        }
+    }
+
+    /**
+     * Retrieves patient information from the patient service.
+     *
+     * @param patientId The ID of the patient
+     * @return PatientDTO containing patient information
+     * @throws ResourceNotFoundException if patient cannot be retrieved
+     */
+    protected PatientDTO getPatientById(Long patientId) {
+<span class="fc" id="L130">        log.info(&quot;----- Getting patient {}&quot;, patientId);</span>
+
+<span class="fc" id="L132">        ResponseEntity&lt;PatientDTO&gt; response = patientServiceClient.getPatientById(patientId);</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        if (response.getStatusCode().is2xxSuccessful()) {</span>
+<span class="fc" id="L134">            return response.getBody();</span>
+        } else {
+<span class="fc" id="L136">            throw new ResourceNotFoundException(&quot;Erreur lors de la récupération du patient&quot;);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
