@@ -18,7 +18,11 @@ import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 import java.util.List;
 
-
+/**
+ * WebFilter that processes JWT authentication from cookies.
+ * Extracts and validates JWT tokens, then sets up Spring Security context for authenticated users.
+ * Redirects to login page when token is invalid.
+ */
 @Component
 @Slf4j
 @RequiredArgsConstructor
@@ -26,6 +30,16 @@ public class JwtAuthFilter implements WebFilter, Ordered {
 
     private final JwtValidator jwtValidator;
 
+    /**
+     * Filters incoming requests to check for valid JWT tokens in cookies.
+     * If valid token found, sets up authentication in security context.
+     * If invalid token found, redirects to login page.
+     * If no token found, continues without authentication.
+     *
+     * @param exchange the server web exchange containing the request and response
+     * @param chain the web filter chain for continuing request processing
+     * @return a Mono that completes when request processing is finished
+     */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
 
@@ -60,18 +74,36 @@ public class JwtAuthFilter implements WebFilter, Ordered {
         return chain.filter(exchange);
     }
 
+    /**
+     * Extracts the JWT token from the request cookies.
+     *
+     * @param req the server HTTP request
+     * @return the JWT token value if present, null otherwise
+     */
     private String extractJwtFromCookies(ServerHttpRequest req) {
         return req.getCookies().getFirst("jwt") != null
                 ? req.getCookies().getFirst("jwt").getValue()
                 : null;
     }
 
+    /**
+     * Redirects the response to the specified URL with HTTP 303 See Other status.
+     *
+     * @param exchange the server web exchange
+     * @param url the redirect URL
+     * @return a Mono that completes when the response is finalized
+     */
     private Mono<Void> redirect(ServerWebExchange exchange, String url) {
         exchange.getResponse().setStatusCode(HttpStatus.SEE_OTHER);
         exchange.getResponse().getHeaders().set(HttpHeaders.LOCATION, url);
         return exchange.getResponse().setComplete();
     }
 
+    /**
+     * Returns the order value of this filter (high priority).
+     *
+     * @return the order value (-1 indicates high priority)
+     */
     @Override
     public int getOrder() {
         return -1; // priorité haute

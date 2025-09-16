@@ -9,12 +9,22 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Component responsible for validating JWT tokens and extracting claims from them.
+ * Uses HMAC-SHA algorithm with a secret key for token verification.
+ */
 @Component
 public class JwtValidator {
 
     @Value("${jwt.secret}")
     private String secret;
 
+    /**
+     * Validates the integrity and authenticity of a JWT token.
+     *
+     * @param token the JWT token string to validate
+     * @return true if the token is valid and properly signed, false otherwise
+     */
     public boolean isValid(String token) {
         try {
             SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
@@ -31,6 +41,14 @@ public class JwtValidator {
         }
     }
 
+    /**
+     * Extracts a specific claim from a JWT token.
+     *
+     * @param jwt the JWT token string to parse
+     * @param string the name of the claim to extract
+     * @return the value of the specified claim as a String
+     * @throws JwtException if the token is invalid or the claim doesn't exist
+     */
     public String extractClaim(String jwt, String string) {
         SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
         return Jwts.parser()

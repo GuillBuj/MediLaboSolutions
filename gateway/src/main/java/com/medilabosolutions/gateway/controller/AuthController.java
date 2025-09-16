@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
+/**
+ * Controller handling authentication operations including user login and JWT token generation.
+ */
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -20,6 +23,13 @@ public class AuthController {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
+    /**
+     * Authenticates user credentials and generates a JWT token upon successful login.
+     *
+     * @param request the login request containing username and password
+     * @return ResponseEntity with JWT token if authentication succeeds,
+     *         or 401 Unauthorized with error message if authentication fails
+     */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         if ("admin".equals(request.getUsername()) && "admin".equals(request.getPassword())) {
@@ -29,6 +39,12 @@ public class AuthController {
         return ResponseEntity.status(401).body("Invalid credentials");
     }
 
+    /**
+     * Generates a JWT token for the authenticated user.
+     *
+     * @param username the username to include as subject in the token
+     * @return the generated JWT token string
+     */
     private String generateToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
@@ -39,12 +55,18 @@ public class AuthController {
     }
 }
 
+/**
+ * Data transfer object for login requests.
+ */
 @Data
 class LoginRequest {
     private String username;
     private String password;
 }
 
+/**
+ * Data transfer object for token responses.
+ */
 @Data
 @AllArgsConstructor
 class TokenResponse {
