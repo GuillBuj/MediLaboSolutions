@@ -1,0 +1,3 @@
+com\medilabosolutions\note_service\service\NoteServiceTest.class
+com\medilabosolutions\note_service\NoteServiceApplicationTests.class
+com\medilabosolutions\note_service\controller\NoteControllerIT.class

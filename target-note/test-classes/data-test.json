@@ -1,0 +1,17 @@
+[
+  {
+    "patId": 1,
+    "patient": "Jean Dupont",
+    "note": "Note de test 1"
+  },
+  {
+    "patId": 1,
+    "patient": "Jean Dupont",
+    "note": "Note de test 2"
+  },
+  {
+    "patId": 2,
+    "patient": "Marie Martin",
+    "note": "Note de test 1"
+  }
+]

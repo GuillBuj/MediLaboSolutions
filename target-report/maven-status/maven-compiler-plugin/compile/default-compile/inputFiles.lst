@@ -1,0 +1,13 @@
+C:\Users\g.bujon\Desktop\p9doc\Nouveau dossier\MediLaboSolutions\report-service\src\main\java\com\medilabosolutions\report_service\dto\PatientDTO.java
+C:\Users\g.bujon\Desktop\p9doc\Nouveau dossier\MediLaboSolutions\report-service\src\main\java\com\medilabosolutions\report_service\exception\ErrorResponse.java
+C:\Users\g.bujon\Desktop\p9doc\Nouveau dossier\MediLaboSolutions\report-service\src\main\java\com\medilabosolutions\report_service\exception\FeignClientException.java
+C:\Users\g.bujon\Desktop\p9doc\Nouveau dossier\MediLaboSolutions\report-service\src\main\java\com\medilabosolutions\report_service\client\PatientServiceClient.java
+C:\Users\g.bujon\Desktop\p9doc\Nouveau dossier\MediLaboSolutions\report-service\src\main\java\com\medilabosolutions\report_service\controller\ReportController.java
+C:\Users\g.bujon\Desktop\p9doc\Nouveau dossier\MediLaboSolutions\report-service\src\main\java\com\medilabosolutions\report_service\exception\ResourceNotFoundException.java
+C:\Users\g.bujon\Desktop\p9doc\Nouveau dossier\MediLaboSolutions\report-service\src\main\java\com\medilabosolutions\report_service\ReportServiceApplication.java
+C:\Users\g.bujon\Desktop\p9doc\Nouveau dossier\MediLaboSolutions\report-service\src\main\java\com\medilabosolutions\report_service\dto\ReportDTO.java
+C:\Users\g.bujon\Desktop\p9doc\Nouveau dossier\MediLaboSolutions\report-service\src\main\java\com\medilabosolutions\report_service\dto\NoteDTO.java
+C:\Users\g.bujon\Desktop\p9doc\Nouveau dossier\MediLaboSolutions\report-service\src\main\java\com\medilabosolutions\report_service\exception\GlobalExceptionHandler.java
+C:\Users\g.bujon\Desktop\p9doc\Nouveau dossier\MediLaboSolutions\report-service\src\main\java\com\medilabosolutions\report_service\constants\TriggerConstants.java
+C:\Users\g.bujon\Desktop\p9doc\Nouveau dossier\MediLaboSolutions\report-service\src\main\java\com\medilabosolutions\report_service\client\NoteServiceClient.java
+C:\Users\g.bujon\Desktop\p9doc\Nouveau dossier\MediLaboSolutions\report-service\src\main\java\com\medilabosolutions\report_service\service\ReportService.java

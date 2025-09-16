@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Patients</title></head>
+<body>
+<h1>Liste des patients</h1>
+<ul>
+    <li th:each="patient : ${patients}">
+        <span th:text="${patient.firstName} + ' ' + ${patient.lastName}"></span>
+        <a th:href="@{'/ui/patients/' + ${patient.id} + '/notes'}">Notes</a>
+        <a th:href="@{'/ui/patients/' + ${patient.id} + '/report'}">Rapport</a>
+    </li>
+</ul>
+</body>
+</html>

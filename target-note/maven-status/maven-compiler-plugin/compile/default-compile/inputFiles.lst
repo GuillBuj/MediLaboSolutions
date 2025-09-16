@@ -1,0 +1,10 @@
+C:\Users\g.bujon\Desktop\MediLaboSolutions\note-service\src\main\java\com\medilabosolutions\note_service\repository\NoteRepository.java
+C:\Users\g.bujon\Desktop\MediLaboSolutions\note-service\src\main\java\com\medilabosolutions\note_service\dto\NoteCreateDTO.java
+C:\Users\g.bujon\Desktop\MediLaboSolutions\note-service\src\main\java\com\medilabosolutions\note_service\service\NoteService.java
+C:\Users\g.bujon\Desktop\MediLaboSolutions\note-service\src\main\java\com\medilabosolutions\note_service\exception\ResourceNotFoundException.java
+C:\Users\g.bujon\Desktop\MediLaboSolutions\note-service\src\main\java\com\medilabosolutions\note_service\NoteServiceApplication.java
+C:\Users\g.bujon\Desktop\MediLaboSolutions\note-service\src\main\java\com\medilabosolutions\note_service\exception\GlobalExceptionHandler.java
+C:\Users\g.bujon\Desktop\MediLaboSolutions\note-service\src\main\java\com\medilabosolutions\note_service\model\Note.java
+C:\Users\g.bujon\Desktop\MediLaboSolutions\note-service\src\main\java\com\medilabosolutions\note_service\controller\NoteController.java
+C:\Users\g.bujon\Desktop\MediLaboSolutions\note-service\src\main\java\com\medilabosolutions\note_service\dto\NoteDTO.java
+C:\Users\g.bujon\Desktop\MediLaboSolutions\note-service\src\main\java\com\medilabosolutions\note_service\mapper\NoteMapper.java

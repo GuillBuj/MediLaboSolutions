@@ -1,0 +1,3 @@
+com\medilabosolutions\patient_service\PatientServiceApplicationTests.class
+com\medilabosolutions\patient_service\service\PatientServiceTest.class
+com\medilabosolutions\patient_service\controller\PatientControllerIT.class
