@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NoteService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">note-service</a> &gt; <a href="index.source.html" class="el_package">com.medilabosolutions.note_service.service</a> &gt; <span class="el_source">NoteService.java</span></div><h1>NoteService.java</h1><pre class="source lang-java linenums">package com.medilabosolutions.note_service.service;
+
+import com.medilabosolutions.note_service.dto.NoteCreateDTO;
+import com.medilabosolutions.note_service.dto.NoteDTO;
+import com.medilabosolutions.note_service.mapper.NoteMapper;
+import com.medilabosolutions.note_service.model.Note;
+import com.medilabosolutions.note_service.repository.NoteRepository;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Service for managing patient notes.
+ * Handles business logic for note creation, retrieval, and deletion.
+ */
+@Service
+<span class="fc" id="L21">@AllArgsConstructor</span>
+<span class="fc" id="L22">@Slf4j</span>
+public class NoteService {
+
+    private final NoteRepository noteRepository;
+    private final NoteMapper noteMapper;
+
+    /**
+     * Creates a new note for a patient.
+     * Automatically sets the current date/time for the note.
+     *
+     * @param noteCreateDTO DTO containing note content and patient information
+     * @return NoteCreateDTO representing the created note with generated ID and timestamp
+     */
+    public NoteCreateDTO createNote(NoteCreateDTO noteCreateDTO) {
+<span class="fc" id="L36">        log.info(&quot;Creating new note: {}&quot;, noteCreateDTO);</span>
+
+<span class="fc" id="L38">        Note note = noteMapper.toEntity(noteCreateDTO);</span>
+<span class="fc" id="L39">        note.setDate(LocalDateTime.now());</span>
+<span class="fc" id="L40">        Note noteCreated = noteRepository.save(note);</span>
+
+<span class="fc" id="L42">        log.info(&quot;Note created: {}&quot;, noteCreated);</span>
+<span class="fc" id="L43">        return noteMapper.toNoteCreateDTO(noteCreated);</span>
+    }
+
+    /**
+     * Retrieves all notes for a specific patient.
+     * GET /api/notes/patient/{patientId}
+     *
+     * @param patientId The ID of the patient to retrieve notes for
+     * @return List of NoteDTOs containing all notes for the specified patient
+     */
+    public List&lt;NoteDTO&gt; getAllNotesByPatientId(int patientId) {
+<span class="fc" id="L54">        log.info(&quot;Getting all notes for patient: {}&quot;, patientId);</span>
+
+<span class="fc" id="L56">        return noteRepository.findByPatId(patientId)</span>
+<span class="fc" id="L57">                .stream()</span>
+<span class="fc" id="L58">                .map(noteMapper::toNoteListItemDTO)</span>
+<span class="fc" id="L59">                .collect(Collectors.toList());</span>
+    }
+
+    /**
+     * Deletes a specific note by its ID.
+     *
+     * @param id The ID of the note to delete
+     */
+    public void deleteNoteById(String id) {
+<span class="fc" id="L68">        log.info(&quot;Deleting note with ID: {}&quot;, id);</span>
+<span class="fc" id="L69">        noteRepository.deleteById(id);</span>
+<span class="fc" id="L70">    }</span>
+
+    /**
+     * Deletes all notes from the system.
+     * Primarily used for testing and cleanup purposes.
+     * Use with caution as this operation is irreversible.
+     */
+    public void deleteAllNotes() {
+<span class="fc" id="L78">        noteRepository.deleteAll();</span>
+<span class="fc" id="L79">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

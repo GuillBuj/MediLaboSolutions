@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NoteController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">note-service</a> &gt; <a href="index.source.html" class="el_package">com.medilabosolutions.note_service.controller</a> &gt; <span class="el_source">NoteController.java</span></div><h1>NoteController.java</h1><pre class="source lang-java linenums">package com.medilabosolutions.note_service.controller;
+
+import com.medilabosolutions.note_service.dto.NoteCreateDTO;
+import com.medilabosolutions.note_service.dto.NoteDTO;
+import com.medilabosolutions.note_service.service.NoteService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * REST Controller for handling patient notes HTTP requests.
+ * Exposes API endpoints for note operations.
+ */
+@RestController
+@RequestMapping(&quot;api/notes&quot;)
+<span class="fc" id="L20">@AllArgsConstructor</span>
+<span class="fc" id="L21">@Slf4j</span>
+public class NoteController {
+
+    private final NoteService noteService;
+
+    /**
+     * Creates a new note for a patient.
+     * POST /api/notes
+     *
+     * @param noteCreateDTO DTO containing note content and patient information
+     * @return ResponseEntity containing the created NoteCreateDTO with HTTP status 201 (Created)
+     */
+    @PostMapping
+    public ResponseEntity&lt;NoteCreateDTO&gt; createNote(@RequestBody NoteCreateDTO noteCreateDTO) {
+<span class="fc" id="L35">        log.info(&quot;Creating note : {}&quot;, noteCreateDTO);</span>
+<span class="fc" id="L36">        return ResponseEntity.status(HttpStatus.CREATED).body(noteService.createNote(noteCreateDTO));</span>
+    }
+
+    /**
+     * Retrieves all notes for a specific patient.
+     * GET /api/notes/patient/{id}
+     *
+     * @param id The ID of the patient to retrieve notes for
+     * @return ResponseEntity containing a list of NoteDTOs with HTTP status 200 (OK)
+     */
+    @GetMapping(&quot;/patient/{id}&quot;)
+    public ResponseEntity&lt;List&lt;NoteDTO&gt;&gt; getAllNotesByPatientId(@PathVariable(name = &quot;id&quot;, required = true) int id
+    ) {
+<span class="fc" id="L49">        log.info(&quot;Getting all notes for: {}&quot;, id);</span>
+<span class="fc" id="L50">        return ResponseEntity.ok(noteService.getAllNotesByPatientId(id));</span>
+    }
+
+    /**
+     * Deletes a specific note by its ID.
+     * DELETE /api/notes/{id}
+     *
+     * @param id The ID of the note to delete
+     */
+    @DeleteMapping(&quot;/{id}&quot;)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteNote(@PathVariable String id) {
+<span class="fc" id="L62">        log.info(&quot;Deleting note with ID: {}&quot;, id);</span>
+<span class="fc" id="L63">        noteService.deleteNoteById(id);</span>
+<span class="fc" id="L64">    }</span>
+
+    /**
+     * Deletes all notes from the system (primarily for testing purposes).
+     * GET /api/notes/delete-all
+     * Use with caution as this operation is irreversible.
+     */
+    @GetMapping(&quot;/delete-all&quot;)
+    public void deleteAllNotes() {
+<span class="fc" id="L73">        log.info(&quot;Deleting all notes&quot;);</span>
+<span class="fc" id="L74">        noteService.deleteAllNotes();</span>
+<span class="fc" id="L75">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
