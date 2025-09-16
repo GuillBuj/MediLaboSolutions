@@ -103,14 +103,14 @@ Steps
 ## 🚀 Live Artifacts
 
 - 📈 **Code Coverage (JaCoCo)**:  
-  [📊 patient-service](https://GuillBuj.github.io/MediLaboSolutions/target-patient/site/jacoco/index.html)
-  [📊 note-service](https://GuillBuj.github.io/MediLaboSolutions/target-note/site/jacoco/index.html)
-  [📊 report-service](https://GuillBuj.github.io/MediLaboSolutions/target-report/site/jacoco/index.html)
+  [📊 patient-service](https://GuillBuj.github.io/MediLaboSolutions/site-patient/jacoco/index.html)
+  [📊 note-service](https://GuillBuj.github.io/MediLaboSolutions/site-note/jacoco/index.html)
+  [📊 report-service](https://GuillBuj.github.io/MediLaboSolutions/site-report/jacoco/index.html)
 
 - ✅ **Unit Test Report (Surefire)**:  
-[🧪 patient-service](https://GuillBuj.github.io/MediLaboSolutions/target-patient/surefire-reports/surefire.html)
-[🧪 note-service](https://GuillBuj.github.io/MediLaboSolutions/target-note/surefire-reports/surefire.html)
-[🧪 report-service](https://GuillBuj.github.io/MediLaboSolutions/target-report/surefire-reports/surefire.html)
+[🧪 patient-service](https://GuillBuj.github.io/MediLaboSolutions/site-patient/surefire-report.html)
+[🧪 note-service](https://GuillBuj.github.io/MediLaboSolutions/site-note/surefire-report.html)
+[🧪 report-service](https://GuillBuj.github.io/MediLaboSolutions/site-report/surefire-report.html)
 
 - 📚 **Javadoc Documentation**:  
   [📘 Browse Javadoc](https://GuillBuj.github.io/MediLaboSolutions/docs/index.html)
